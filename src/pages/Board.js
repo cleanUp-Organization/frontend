@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { addBoard } from "../api/clean";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Board() {
   //랜덤 아이디 생성
@@ -21,7 +22,7 @@ function Board() {
   });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
+  const navigate = useNavigate();
   //데이터 등록
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -36,6 +37,7 @@ function Board() {
     alert(`🧹 ${title} 작성 완료!`);
     setTitle("");
     setContent("");
+    navigate("/");
   };
   const fileInput = React.useRef(null);
   const onImgButton = (event) => {
@@ -45,7 +47,10 @@ function Board() {
   const onImgHandler = async (event) => {
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
-    const response = await axios.post("http://localhost:4000/api", formData);
+    const response = await axios.post(
+      "${process.env.REACT_APP_SERVER_URL}/api",
+      formData
+    );
   };
   return (
     <>
@@ -118,4 +123,5 @@ const Button = styled.button`
   height: 50px;
   margin: 0px 0px 0px auto;
   color: white;
+  cursor: pointer;
 `;

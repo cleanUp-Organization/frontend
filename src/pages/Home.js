@@ -13,7 +13,7 @@ function Home() {
     <>
       <Layout>
         <Header />
-        <Nav>프로 살림꾼으로 거듭나는 꿀팁은 여기로🔥</Nav>
+        <Nav>프로 살림꾼으로 거듭나는 꿀팁은 여기로 🔥</Nav>
         <Wrap>
           {data?.map((item) => {
             return (
@@ -49,15 +49,16 @@ export default Home;
 const Nav = styled.p`
   margin: 0 auto;
   margin-top: 4.5rem;
-  width: 860px;
+  width: 870px;
 `;
 const Wrap = styled.div`
-  width: 860px;
+  width: 870px;
   margin: 0 auto;
   margin-top: 2rem;
   height: 300px;
   display: flex;
   gap: 20px;
+  overflow: hidden;
 `;
 
 const CleanBox = styled.div`
@@ -73,8 +74,8 @@ const Title = styled.div`
 const ImgBox = styled.div`
   width: 200px;
   height: 200px;
-  border: 1px solid black;
   position: relative;
+  background-color: lightgray;
 `;
 
 const Heart = styled.div`

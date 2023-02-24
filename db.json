@@ -1,19 +1,19 @@
 {
   "api": [
     {
-      "id": "56k0sn1tfj9",
-      "title": "운동화 세탁하는 법",
-      "content": "다이소에서 청소 솔이랑 락스를 사서 물에 불려줍니다!"
+      "id": "swbrbsxglw",
+      "title": "운동화 세탁",
+      "content": "운동화 세탁하기"
     },
     {
-      "id": "9cjrkf1dvhj",
+      "id": "075wlfc76o4h",
+      "title": "이불 세탁",
+      "content": "이불 세탁하기"
+    },
+    {
+      "id": "wkni4t769dk",
       "title": "바닥 청소하는 법",
-      "content": "묶은 때 제거!"
-    },
-    {
-      "id": "acq2hz0wp1",
-      "title": "추가1",
-      "content": "추가1"
+      "content": "바닥청소하는 법"
     }
   ]
 }

@@ -1,12 +1,16 @@
 import axios from "axios";
 
 const getBoard = async () => {
-  const response = await axios.get(`http://localhost:4000/api`);
+  const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api`);
   return response.data;
 };
 
 const addBoard = async (newBoard) => {
-  await axios.post(`http://localhost:4000/api`, newBoard);
+  await axios.post(`${process.env.REACT_APP_SERVER_URL}/api`, newBoard);
 };
 
-export { getBoard, addBoard };
+const deleteBoard = async (id) => {
+  await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/${id}`);
+};
+
+export { getBoard, addBoard, deleteBoard };
