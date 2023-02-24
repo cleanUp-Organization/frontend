@@ -17,6 +17,7 @@ function Header() {
     width: "40px",
     height: "40px",
     margin: "auto 0px",
+    cursor: "pointer",
   };
   const homeStyle = {
     color: "white",
@@ -37,7 +38,7 @@ function Header() {
         <GiBroom style={logoStyle} />
         <Logo>청소 대장</Logo>
       </TitleBox>
-      <FaUserCircle style={userStyle} />
+      <FaUserCircle style={userStyle} onClick={() => navigate("/board")} />
     </HeaderBox>
   );
 }
