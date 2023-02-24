@@ -10,7 +10,7 @@ function Home() {
   return (
     <>
       <Layout>
-        <Header></Header>
+        <Header>g</Header>
       </Layout>
     </>
   );
