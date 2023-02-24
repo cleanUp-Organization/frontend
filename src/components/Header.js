@@ -24,6 +24,7 @@ function Header() {
     width: "30px",
     height: "30px",
     margin: "auto 0px",
+    cursor: "pointer",
   };
   const navigate = useNavigate();
   return (

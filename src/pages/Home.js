@@ -1,14 +1,14 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { getBoard } from "../api/clean";
 import styled from "styled-components";
-import { AiFillHeart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { data } = useQuery("clean", getBoard);
-
+  const navigate = useNavigate();
   return (
     <>
       <Layout>
@@ -17,7 +17,12 @@ function Home() {
         <Wrap>
           {data?.map((item) => {
             return (
-              <CleanBox key={item.id}>
+              <CleanBox
+                key={item.id}
+                onClick={() => {
+                  navigate(`/${item.id}`);
+                }}
+              >
                 <ImgBox>
                   이미지 박스
                   <Heart>❤︎</Heart>
