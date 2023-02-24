@@ -13,4 +13,11 @@ const deleteBoard = async (id) => {
   await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/${id}`);
 };
 
-export { getBoard, addBoard, deleteBoard };
+const updateBoard = async (payload) => {
+  await axios.patch(`${process.env.REACT_APP_SERVER_URL}/api/${payload.id}`, {
+    title: payload.title,
+    content: payload.content,
+  });
+};
+
+export { getBoard, addBoard, deleteBoard, updateBoard };
