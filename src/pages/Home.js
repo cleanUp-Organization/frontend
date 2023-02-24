@@ -25,6 +25,7 @@ function Home() {
               >
                 <ImgBox>
                   이미지 박스
+                  <Count>1</Count>
                   <Heart>❤︎</Heart>
                 </ImgBox>
                 <Title>{item.title}</Title>
@@ -76,6 +77,12 @@ const ImgBox = styled.div`
   height: 200px;
   position: relative;
   background-color: lightgray;
+`;
+
+const Count = styled.div`
+  position: absolute;
+  top: 83%;
+  left: 74%;
 `;
 
 const Heart = styled.div`

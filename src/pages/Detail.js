@@ -108,6 +108,7 @@ function Detail() {
         <ImgBox>이미지 박스</ImgBox>
         <p>{detail.content}</p>
         <Line></Line>
+        <div>댓글공간</div>
       </Wrap>
     </>
   );
