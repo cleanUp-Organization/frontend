@@ -107,7 +107,7 @@ function Detail() {
             )}
           </div>
         </TitleBox>
-        <ImgBox>이미지 박스</ImgBox>
+        <img src={detail.images} alt="img" />
         <p>{detail.content}</p>
         <Line></Line>
         <div>

@@ -65,6 +65,10 @@ function Board() {
       }
     }
   };
+  // const addImg = async ()=>{
+  //   const fd = new FormData()
+  // }
+
   // const onImgHandler = async (event) => {
   //   const formData = new FormData();
   //   formData.append("file", event.target.files[0]);

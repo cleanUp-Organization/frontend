@@ -2,14 +2,32 @@ import axios from "axios";
 import { instance } from "./axios";
 import { baseURL } from "./axios";
 
+// const getBoard = async () => {
+//   const response = await instance.get("/api/boards");
+//   return response.data;
+// };
 const getBoard = async () => {
-  const response = await instance.get("/api/boards");
+  const response = await instance.get("/api");
   return response.data;
 };
 
+// const addBoard = async (newBoard) => {
+//   await baseURL
+//     .post("/api/board", newBoard)
+//     .then((response) => {
+//       if (response.statusCode === "OK") {
+//         alert(response.msg);
+//       }
+//     })
+//     .catch((error) => {
+//       if (error.statusCode === "UNAUTHORIZED") {
+//         alert(error.msg);
+//       }
+//     });
+// };
 const addBoard = async (newBoard) => {
   await baseURL
-    .post("/api/board", newBoard)
+    .post("/api", newBoard)
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);
