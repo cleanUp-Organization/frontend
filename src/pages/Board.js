@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { addBoard } from "../api/clean";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Board() {
@@ -30,9 +29,10 @@ function Board() {
       return alert("빈칸을 채워주세요!");
     const newBoard = {
       id: id,
+      // username:username,
       title: title,
+      images: imgView,
       content: content,
-      url: imgView,
     };
     mutation.mutate(newBoard);
     alert(`🧹 ${title} 작성 완료!`);
