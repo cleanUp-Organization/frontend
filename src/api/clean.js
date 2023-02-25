@@ -40,9 +40,25 @@ const addBoard = async (newBoard) => {
     });
 };
 
+// const deleteBoard = async (id) => {
+//   await baseURL
+//     .delete(`/api/board/${id}`)
+//     .then((response) => {
+//       if (response.statusCode === "OK") {
+//         alert(response.msg);
+//       }
+//     })
+//     .catch((error) => {
+//       if (error.statusCode === "UNAUTHORIZED") {
+//         alert(error.msg);
+//       } else if (error.statusCode === "BAD_REQUEST") {
+//         alert(error.msg);
+//       }
+//     });
+// };
 const deleteBoard = async (id) => {
   await baseURL
-    .delete(`/api/board/${id}`)
+    .delete(`/api/${id}`)
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);
