@@ -101,11 +101,25 @@ const updateBoard = async (payload) => {
     });
 };
 
+// const addComment = async (newComment) => {
+//   await baseURL.patch(
+//     `${process.env.REACT_APP_SERVER_URL}/api/${newComment.target}`,
+//     newComment
+//   );
+// };
 const addComment = async (newComment) => {
-  await axios.patch(
-    `${process.env.REACT_APP_SERVER_URL}/api/${newComment.target}`,
-    newComment
-  );
+  await baseURL
+    .put(`/api/comment/${newComment.target}`, newComment)
+    .then((response) => {
+      if (response.statusCode === "OK") {
+        alert(response.msg);
+      }
+    })
+    .catch((error) => {
+      if (error.statusCode === "UNAUTHORIZED") {
+        alert(error.msg);
+      }
+    });
 };
 
 const deleteComment = async (id) => {
