@@ -27,7 +27,7 @@ function Board() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (title.trim() === "" || content.trim() === "")
-      return alert("빈칸을 채워주세요!");
+      return alert("빈칸을 채워주세요!!");
     const newBoard = {
       id: id,
       title: title,
