@@ -1,12 +1,25 @@
 import axios from "axios";
+import { instance } from "./axios";
+import { baseURL } from "./axios";
 
 const getBoard = async () => {
-  const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api`);
+  const response = await instance.get("/api/boards");
   return response.data;
 };
 
 const addBoard = async (newBoard) => {
-  await axios.post(`${process.env.REACT_APP_SERVER_URL}/api`, newBoard);
+  await instance
+    .post("/board", newBoard)
+    .then((response) => {
+      if (response.statusCode === "ok") {
+        alert(response.msg);
+      }
+    })
+    .catch((error) => {
+      if (error.statusCode === "UNAUTHORIZED") {
+        alert(error.msg);
+      }
+    });
 };
 
 const deleteBoard = async (id) => {
