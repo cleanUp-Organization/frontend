@@ -80,7 +80,7 @@ function Detail() {
                     <TitleInput
                       type="text"
                       placeholder={detail.title}
-                      value={updateTitle}
+                      value={updateTitle || ""}
                       onChange={(event) => {
                         setUpdateTitle(event.target.value);
                       }}
@@ -89,7 +89,7 @@ function Detail() {
                     <ContentInput
                       type="text"
                       placeholder={detail.content}
-                      value={updateContent}
+                      value={updateContent || ""}
                       onChange={(event) => {
                         setUpdateContent(event.target.value);
                       }}

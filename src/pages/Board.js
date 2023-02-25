@@ -27,11 +27,12 @@ function Board() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (title.trim() === "" || content.trim() === "")
-      return alert("빈칸을 채워주세요!!");
+      return alert("빈칸을 채워주세요!");
     const newBoard = {
       id: id,
       title: title,
       content: content,
+      url: imgView,
     };
     mutation.mutate(newBoard);
     alert(`🧹 ${title} 작성 완료!`);
@@ -39,19 +40,39 @@ function Board() {
     setContent("");
     navigate("/");
   };
+  //미리보기 구현
+  const [imgView, setImgView] = useState([]);
+  // const Time = moment().fromNow()
+  //이미지 구현
   const fileInput = React.useRef(null);
   const onImgButton = (event) => {
     event.preventDefault();
     fileInput.current.click();
   };
-  const onImgHandler = async (event) => {
-    const formData = new FormData();
-    formData.append("file", event.target.files[0]);
-    const response = await axios.post(
-      "${process.env.REACT_APP_SERVER_URL}/api",
-      formData
-    );
+  const onImgHandler = (event) => {
+    setImgView([]);
+    for (let i = 0; i < event.target.files.length; i++) {
+      if (event.target.files[i]) {
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files[i]);
+        reader.onloadend = () => {
+          const base = reader.result;
+          if (base) {
+            const baseSub = base.toString();
+            setImgView((imgView) => [...imgView, baseSub]);
+          }
+        };
+      }
+    }
   };
+  // const onImgHandler = async (event) => {
+  //   const formData = new FormData();
+  //   formData.append("file", event.target.files[0]);
+  //   const response = await axios.post(
+  //     "${process.env.REACT_APP_SERVER_URL}/api",
+  //     formData
+  //   );
+  // };
   return (
     <>
       <Header />
@@ -85,6 +106,11 @@ function Board() {
           }}
           maxLength={100}
         />
+        <div>
+          {imgView.map((item) => {
+            return <img src={item} alt="img" />;
+          })}
+        </div>
         <Button>작성</Button>
       </FormBox>
     </>
