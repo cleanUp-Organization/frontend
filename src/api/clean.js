@@ -1,5 +1,6 @@
 import axios from "axios";
 import { instance } from "./axios";
+import { baseURL } from "./axios";
 
 const getBoard = async () => {
   const response = await instance.get("/api/boards");
@@ -7,7 +8,7 @@ const getBoard = async () => {
 };
 
 const addBoard = async (newBoard) => {
-  await instance
+  await baseURL
     .post("/api/board", newBoard)
     .then((response) => {
       if (response.statusCode === "OK") {
@@ -22,7 +23,7 @@ const addBoard = async (newBoard) => {
 };
 
 const deleteBoard = async (id) => {
-  await instance
+  await baseURL
     .delete(`/api/board/${id}`)
     .then((response) => {
       if (response.statusCode === "OK") {
@@ -46,11 +47,24 @@ const deleteBoard = async (id) => {
 // };
 
 const updateBoard = async (payload) => {
-  await instance.put(`/api/board/${payload.id}`, {
-    title: payload.title,
-    // images:payload.img,
-    content: payload.content,
-  });
+  await baseURL
+    .put(`/api/board/${payload.id}`, {
+      title: payload.title,
+      // images:payload.img,
+      content: payload.content,
+    })
+    .then((response) => {
+      if (response.statusCode === "OK") {
+        alert(response.msg);
+      }
+    })
+    .catch((error) => {
+      if (error.statusCode === "UNAUTHORIZED") {
+        alert(error.msg);
+      } else if (error.statusCode === "BAD_REQUEST") {
+        alert(error.msg);
+      }
+    });
 };
 
 const addComment = async (newComment) => {
