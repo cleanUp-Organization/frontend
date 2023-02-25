@@ -56,6 +56,7 @@ function Detail() {
       const payload = {
         id: id,
         title: updateTitle,
+        // images: images,
         content: updateContent,
       };
       updateMutation.mutate(payload);
