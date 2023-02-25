@@ -35,9 +35,9 @@ function Home() {
         </Wrap>
         <PageBox>
           <Arrow> ◀ </Arrow>
-          <Page>●</Page>
-          <Page>●</Page>
-          <Page>●</Page>
+          <Page>1</Page>
+          <Page>2</Page>
+          <Page>3</Page>
           <Arrow> ▶</Arrow>
         </PageBox>
       </Layout>
@@ -119,5 +119,6 @@ const Arrow = styled.button`
 
 const Page = styled.div`
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
+  margin: auto 0;
 `;

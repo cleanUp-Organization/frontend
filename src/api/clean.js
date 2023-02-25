@@ -20,4 +20,11 @@ const updateBoard = async (payload) => {
   });
 };
 
-export { getBoard, addBoard, deleteBoard, updateBoard };
+const addComment = async (newComment) => {
+  await axios.patch(
+    `${process.env.REACT_APP_SERVER_URL}/api/${newComment.target}`,
+    newComment
+  );
+};
+
+export { getBoard, addBoard, deleteBoard, updateBoard, addComment };

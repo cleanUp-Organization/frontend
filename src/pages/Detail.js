@@ -5,6 +5,7 @@ import axios from "axios";
 import Header from "../components/Header";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteBoard, updateBoard } from "../api/clean";
+import Comment from "../components/comment";
 
 function Detail() {
   const { id } = useParams();
@@ -108,7 +109,9 @@ function Detail() {
         <ImgBox>이미지 박스</ImgBox>
         <p>{detail.content}</p>
         <Line></Line>
-        <div>댓글공간</div>
+        <div>
+          <Comment />
+        </div>
       </Wrap>
     </>
   );
