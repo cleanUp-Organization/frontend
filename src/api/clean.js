@@ -27,4 +27,14 @@ const addComment = async (newComment) => {
   );
 };
 
-export { getBoard, addBoard, deleteBoard, updateBoard, addComment };
+const deleteComment = async (id) => {
+  await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/${id}`);
+};
+export {
+  getBoard,
+  addBoard,
+  deleteBoard,
+  updateBoard,
+  addComment,
+  deleteComment,
+};

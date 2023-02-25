@@ -9,8 +9,8 @@ function Comment() {
   const { id } = useParams();
   const { data } = useQuery("clean", getBoard);
   const target = data?.filter((item) => item.id === id)[0];
-  const [title, setCommentTitle] = useState("");
-  const [content, setCommentContent] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
   const mutation = useMutation(addComment, {
     onSuccess: () => queryClient.invalidateQueries("clean"),
@@ -19,12 +19,12 @@ function Comment() {
     event.preventDefault();
     const newComment = {
       target: id,
-      comments: [...(target.comments || []), { title, content }],
+      comments: [...(target.comments || []), { nickname, comment }],
     };
     mutation.mutate(newComment);
     alert("댓글 등록 완료!");
-    setCommentTitle("");
-    setCommentContent("");
+    setNickname("");
+    setComment("");
   };
 
   return (
@@ -34,17 +34,17 @@ function Comment() {
           <User
             type="text"
             placeholder="이름"
-            value={title}
+            value={nickname}
             onChange={(event) => {
-              setCommentTitle(event.target.value);
+              setNickname(event.target.value);
             }}
           />
           <CommentInput
             type="text"
             placeholder="댓글"
-            value={content}
+            value={comment}
             onChange={(event) => {
-              setCommentContent(event.target.value);
+              setComment(event.target.value);
             }}
           />
           <Button>등록</Button>

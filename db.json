@@ -6,16 +6,12 @@
       "content": "운동화 세탁하기",
       "comments": [
         {
-          "title": "1",
-          "content": "1"
+          "nickname": "홍길동",
+          "comment": "댓글달기"
         },
         {
-          "title": "ㅎ",
-          "content": "ㅎ"
-        },
-        {
-          "title": "댓글",
-          "content": "달기"
+          "nickname": "ㅎ",
+          "comment": "ㅎ"
         }
       ],
       "target": "swbrbsxglw"
@@ -26,8 +22,8 @@
       "content": "이불빨래 하는 방법",
       "comments": [
         {
-          "title": "2",
-          "content": "2"
+          "nickname": "ㅎ",
+          "comment": "ㅎ"
         }
       ],
       "target": "wkni4t769dk"
