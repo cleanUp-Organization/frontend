@@ -2,17 +2,15 @@ import React from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import { useState } from "react";
-import { instance } from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
-  let loginid = document.querySelector("#loginid");
+  let username = document.querySelector("#username");
   let passwordForm = document.querySelector("#password");
-  let re_passwordForm = document.querySelector("#re_password");
-
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
-    loginid: "",
+    username: "",
     password: "",
-    re_password: "",
   });
 
   const onChange = (e) => {
@@ -36,39 +34,32 @@ export default function App() {
 
   function letsJoin() {
     //로그인 유효성 검사
-    if (inputs.loginid === "") {
+    if (inputs.username === "") {
       alert("아이디를 입력해주세요!");
-      loginid.focus();
+      username.focus();
       return;
-    } else if (CheckPassid(inputs.loginid) === false) {
+    } else if (CheckPassid(inputs.username) === false) {
       alert("아이디는 4자 이상의 영소문자, 숫자만 가능합니다.");
-      loginid.focus();
+      username.focus();
       return;
     } else if (inputs.password === "") {
       alert("비밀번호를 입력해주세요!");
       passwordForm.focus();
       return;
-    } else if (inputs.re_password === "") {
-      alert("비밀번호 중복 확인을 입력해주세요!");
-      re_passwordForm.focus();
-      return;
     } else if (CheckPass(inputs.password) === false) {
       alert("비밀번호는 8자 이상의 영대소문자, 숫자만 가능합니다.");
       passwordForm.focus();
       return;
-    } else if (inputs.re_password !== inputs.password) {
-      alert("비밀번호가 동일하지 않습니다!");
-      re_passwordForm.focus();
-      return;
     } else {
-      fetch("/api/signup", {
+      fetch("http://13.125.211.170:8080/api/user/signup", {
         //백엔드랑 협의된 주소 입력
         method: "post",
         headers: {
           "content-type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
-          loginid: inputs.loginid,
+          username: inputs.username,
           password: inputs.password,
         }),
       })
@@ -81,6 +72,7 @@ export default function App() {
             alert("회원가입에 실패하였습니다.");
           }
         });
+      navigate("/login");
     }
   }
 
@@ -92,8 +84,8 @@ export default function App() {
 
       <input
         type="text"
-        id="loginid"
-        name="loginid"
+        id="username"
+        name="username"
         onChange={onChange}
         placeholder="아이디"
       />
@@ -104,14 +96,6 @@ export default function App() {
         name="password"
         onChange={onChange}
         placeholder="비밀번호"
-      />
-
-      <input
-        type="password"
-        id="re_password"
-        name="re_password"
-        onChange={onChange}
-        placeholder="비밀번호 확인"
       />
 
       <input

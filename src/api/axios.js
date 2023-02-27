@@ -15,9 +15,10 @@ export const baseURL = axios.create({
 });
 
 //인스턴스 request header
-baseURL.interceptors.request.use((config) => {
-  if (config.headers === undefined) return;
-  const token = localStorage.getItem("id");
-  config.headers["Authorization"] = `${token}`;
-  return config;
-});
+// baseURL.interceptors.request.use((config) => {
+//   console.log(config.headers);
+//   if (config.headers.Authorization === "null") return;
+//   const token = localStorage.getItem("token");
+//   config.headers["Authorization"] = `${token}`;
+//   return config;
+// });
