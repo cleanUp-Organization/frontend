@@ -82,6 +82,11 @@ function Board() {
       <Header />
       <FormBox onSubmit={onSubmitHandler}>
         <button onClick={onImgButton}>파일 업로드</button>
+        <div>
+          {imgView.map((item) => {
+            return <ImgBox src={item} alt="img" />;
+          })}
+        </div>
         <input
           type="file"
           accept="image/*"
@@ -110,11 +115,7 @@ function Board() {
           }}
           maxLength={100}
         />
-        <div>
-          {imgView.map((item) => {
-            return <img src={item} alt="img" />;
-          })}
-        </div>
+
         <Button>작성</Button>
       </FormBox>
     </>
@@ -154,4 +155,9 @@ const Button = styled.button`
   margin: 0px 0px 0px auto;
   color: white;
   cursor: pointer;
+`;
+
+const ImgBox = styled.img`
+  width: 800px;
+  height: 200px;
 `;
