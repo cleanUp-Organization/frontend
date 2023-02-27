@@ -26,7 +26,8 @@ function Comment() {
     setNickname("");
     setComment("");
   };
-
+  //   const Count = target.comments.length;
+  //   console.log(Count);
   return (
     <div>
       <WrapBox>
@@ -49,7 +50,7 @@ function Comment() {
           />
           <Button>등록</Button>
         </form>
-        <CounterBox>댓글 {target.comments.length}</CounterBox>
+        {/* <CounterBox>댓글 {Count}</CounterBox> */}
       </WrapBox>
       <Comments />
     </div>

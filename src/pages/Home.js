@@ -24,7 +24,7 @@ function Home() {
                 }}
               >
                 <ImgBox>
-                  이미지 박스
+                  <ImgView src={item.images} alt="img" />
                   <Count>1</Count>
                   <Heart>❤︎</Heart>
                 </ImgBox>
@@ -77,6 +77,11 @@ const ImgBox = styled.div`
   height: 200px;
   position: relative;
   background-color: lightgray;
+`;
+
+const ImgView = styled.img`
+  width: 200px;
+  height: 200px;
 `;
 
 const Count = styled.div`

@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { addBoard } from "../api/clean";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Board() {
@@ -27,10 +26,12 @@ function Board() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (title.trim() === "" || content.trim() === "")
-      return alert("빈칸을 채워주세요!!");
+      return alert("빈칸을 채워주세요!");
     const newBoard = {
       id: id,
+      // username:username,
       title: title,
+      images: imgView,
       content: content,
     };
     mutation.mutate(newBoard);
@@ -39,24 +40,53 @@ function Board() {
     setContent("");
     navigate("/");
   };
+  //미리보기 구현
+  const [imgView, setImgView] = useState([]);
+  // const Time = moment().fromNow()
+  //이미지 구현
   const fileInput = React.useRef(null);
   const onImgButton = (event) => {
     event.preventDefault();
     fileInput.current.click();
   };
-  const onImgHandler = async (event) => {
-    const formData = new FormData();
-    formData.append("file", event.target.files[0]);
-    const response = await axios.post(
-      "${process.env.REACT_APP_SERVER_URL}/api",
-      formData
-    );
+  const onImgHandler = (event) => {
+    setImgView([]);
+    for (let i = 0; i < event.target.files.length; i++) {
+      if (event.target.files[i]) {
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files[i]);
+        reader.onloadend = () => {
+          const base = reader.result;
+          if (base) {
+            const baseSub = base.toString();
+            setImgView((imgView) => [...imgView, baseSub]);
+          }
+        };
+      }
+    }
   };
+  // const addImg = async ()=>{
+  //   const fd = new FormData()
+  // }
+
+  // const onImgHandler = async (event) => {
+  //   const formData = new FormData();
+  //   formData.append("file", event.target.files[0]);
+  //   const response = await axios.post(
+  //     "${process.env.REACT_APP_SERVER_URL}/api",
+  //     formData
+  //   );
+  // };
   return (
     <>
       <Header />
       <FormBox onSubmit={onSubmitHandler}>
         <button onClick={onImgButton}>파일 업로드</button>
+        <div>
+          {imgView.map((item) => {
+            return <ImgBox src={item} alt="img" />;
+          })}
+        </div>
         <input
           type="file"
           accept="image/*"
@@ -85,6 +115,7 @@ function Board() {
           }}
           maxLength={100}
         />
+
         <Button>작성</Button>
       </FormBox>
     </>
@@ -124,4 +155,9 @@ const Button = styled.button`
   margin: 0px 0px 0px auto;
   color: white;
   cursor: pointer;
+`;
+
+const ImgBox = styled.img`
+  width: 800px;
+  height: 200px;
 `;

@@ -56,6 +56,7 @@ function Detail() {
       const payload = {
         id: id,
         title: updateTitle,
+        // images: images,
         content: updateContent,
       };
       updateMutation.mutate(payload);
@@ -80,7 +81,7 @@ function Detail() {
                     <TitleInput
                       type="text"
                       placeholder={detail.title}
-                      value={updateTitle}
+                      value={updateTitle || ""}
                       onChange={(event) => {
                         setUpdateTitle(event.target.value);
                       }}
@@ -89,7 +90,7 @@ function Detail() {
                     <ContentInput
                       type="text"
                       placeholder={detail.content}
-                      value={updateContent}
+                      value={updateContent || ""}
                       onChange={(event) => {
                         setUpdateContent(event.target.value);
                       }}
@@ -106,7 +107,7 @@ function Detail() {
             )}
           </div>
         </TitleBox>
-        <ImgBox>이미지 박스</ImgBox>
+        <img src={detail.images} alt="img" />
         <p>{detail.content}</p>
         <Line></Line>
         <div>
