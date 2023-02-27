@@ -24,8 +24,8 @@ function Board() {
     const newBoard = {
       // username:username,
       title: title,
-      images: imgView,
       content: content,
+      images: imgView,
     };
     mutation.mutate(newBoard);
     alert(`🧹 ${title} 작성 완료!`);

@@ -27,12 +27,13 @@ function Detail() {
   //상세페이지 조회
   useEffect(() => {
     const detailBoard = async () => {
-      const { data } = await instance.get(`/api/board/${id}`);
+      // const { data } = await instance.get(`/api/board/${id}`);
+      const { data } = await axios.get(`http://localhost:4000/api/${id}`);
       return data;
     };
     detailBoard().then((result) => setDetail(result));
   }, [id]);
-  console.log(id);
+
   //삭제
   const deleteHandler = (id) => {
     const message = window.confirm("기록을 삭제하시겠습니까?");
@@ -49,8 +50,28 @@ function Detail() {
   const onToggle = () => setOpen(!open);
   const [updateTitle, setUpdateTitle] = useState(detail.title);
   const [updateContent, setUpdateContent] = useState(detail.content);
-  const [updateImg, setUpdateImg] = useState(detail.images);
+  const [imgView, setImgView] = useState([]);
   const fileInput = React.useRef(null);
+  const onImgButton = (event) => {
+    event.preventDefault();
+    fileInput.current.click();
+  };
+  const onImgHandler = (event) => {
+    setImgView([]);
+    for (let i = 0; i < event.target.files.length; i++) {
+      if (event.target.files[i]) {
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files[i]);
+        reader.onloadend = () => {
+          const base = reader.result;
+          if (base) {
+            const baseSub = base.toString();
+            setImgView((imgView) => [...imgView, baseSub]);
+          }
+        };
+      }
+    }
+  };
   const updateHandler = () => {
     const message = window.confirm("기록을 수정하시겠습니까?");
     if (!message) {
@@ -59,8 +80,8 @@ function Detail() {
       const payload = {
         id: id,
         title: updateTitle,
-        // images: updateImg,
         content: updateContent,
+        images: imgView,
       };
       updateMutation.mutate(payload);
       setDetail(payload);
@@ -89,15 +110,21 @@ function Detail() {
                         setUpdateTitle(event.target.value);
                       }}
                     />
-                    {/* <input
-                    type="file"
-                    accept="image/*"
-                    name="fileUpload"
-                    value={updateImg || ""}
-                    style={{ display: "none" }}
-                    ref={fileInput}
-                    onChange={onImgHandler}
-                    /> */}
+                    <button onClick={onImgButton}>파일 업로드</button>
+                    <div>
+                      {imgView?.map((item) => {
+                        return <ImgBox src={item} alt="img" />;
+                      })}
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="fileUpload"
+                      // value={updateImg || ""}
+                      style={{ display: "none" }}
+                      ref={fileInput}
+                      onChange={onImgHandler}
+                    />
                     <ContentInput
                       type="text"
                       placeholder={detail.content}
