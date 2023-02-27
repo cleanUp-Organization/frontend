@@ -33,15 +33,26 @@ function Board() {
     // };
     // mutation.mutate(newBoard);
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("imgUrl", file);
-    mutation.mutate(formData);
+    // formData.append("title", title);
+    // formData.append("content", content);
+    // formData.append("imgUrl", file);
+    formData.append("file", file);
+    const newBoard = [
+      {
+        title: formData.append("title", title),
+        content: formData.append("content", content),
+      },
+    ];
+    formData.append(
+      "data",
+      new Blob([JSON.stringify(newBoard)], { type: "application/json" })
+    );
     console.log(
       formData.get("title"),
       formData.get("content"),
-      formData.get("imgUrl")
+      formData.get("file")
     );
+    mutation.mutate(formData);
     alert(`🧹 ${title} 작성 완료!`);
     setTitle("");
     setContent("");
