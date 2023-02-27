@@ -5,7 +5,7 @@ import { useState } from 'react'
 import axios from 'axios'
 
 export default function App() {
-  let loginid = document.querySelector('#loginid');
+  let username = document.querySelector('#username');
 	let password = document.querySelector('#password'); //아이디 중복 확인 버튼
 
 	const [inputs, setInputs] = useState({  
@@ -20,22 +20,23 @@ export default function App() {
     }
 
 	function letsLogin() {
-		if(inputs.loginid===""){
+		if(inputs.username===""){
 			alert("아이디를 입력해주세요.");
 			return;
 		}
     else if(inputs.password==="false"){
-			alert("비밀번호를 입력해주세요");
+			alert("비밀번호가 틀렸습니다.");
 			return;
 		}
     else{
-		   fetch("/api/login", { //백엔드랑 협의된 주소 입력
+		   fetch("http://13.125.211.170:8080/api/user/login", { //백엔드랑 협의된 주소 입력
+       
 			   method: 'post',
 			   headers: {
 				   'content-type': 'application/json'
 			   },
 			   body : JSON.stringify({
-					loginid : inputs.username,
+					username : inputs.username,
           password : inputs.password
 			   })
         }).then(res => res.json())
@@ -70,11 +71,10 @@ export default function App() {
       <h2>로그인</h2>
 
       <input type="text" 
-      id="loginid" 
+      id="username" 
       name="username" 
       placeholder="아이디" 
       onChange={onChange}
-
       />
       
       <input type="password" 
