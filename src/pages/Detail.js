@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteBoard, updateBoard } from "../api/clean";
 import Comment from "../components/comment";
+import { instance } from "../api/axios";
 
 function Detail() {
   const { id } = useParams();
@@ -26,12 +27,12 @@ function Detail() {
   //상세페이지 조회
   useEffect(() => {
     const detailBoard = async () => {
-      const { data } = await axios.get(`http://localhost:4000/api/${id}`);
+      const { data } = await instance.get(`/api/board/${id}`);
       return data;
     };
     detailBoard().then((result) => setDetail(result));
   }, [id]);
-
+  console.log(id);
   //삭제
   const deleteHandler = (id) => {
     const message = window.confirm("기록을 삭제하시겠습니까?");
@@ -48,6 +49,8 @@ function Detail() {
   const onToggle = () => setOpen(!open);
   const [updateTitle, setUpdateTitle] = useState(detail.title);
   const [updateContent, setUpdateContent] = useState(detail.content);
+  const [updateImg, setUpdateImg] = useState(detail.images);
+  const fileInput = React.useRef(null);
   const updateHandler = () => {
     const message = window.confirm("기록을 수정하시겠습니까?");
     if (!message) {
@@ -56,7 +59,7 @@ function Detail() {
       const payload = {
         id: id,
         title: updateTitle,
-        // images: images,
+        // images: updateImg,
         content: updateContent,
       };
       updateMutation.mutate(payload);
@@ -86,7 +89,15 @@ function Detail() {
                         setUpdateTitle(event.target.value);
                       }}
                     />
-                    <ImgBox>이미지 박스</ImgBox>
+                    {/* <input
+                    type="file"
+                    accept="image/*"
+                    name="fileUpload"
+                    value={updateImg || ""}
+                    style={{ display: "none" }}
+                    ref={fileInput}
+                    onChange={onImgHandler}
+                    /> */}
                     <ContentInput
                       type="text"
                       placeholder={detail.content}
@@ -110,9 +121,7 @@ function Detail() {
         <img src={detail.images} alt="img" />
         <p>{detail.content}</p>
         <Line></Line>
-        <div>
-          <Comment />
-        </div>
+        <div>{/* <Comment /> */}</div>
       </Wrap>
     </>
   );

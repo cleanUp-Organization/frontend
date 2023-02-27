@@ -6,12 +6,6 @@ import { addBoard } from "../api/clean";
 import { useNavigate } from "react-router-dom";
 
 function Board() {
-  //랜덤 아이디 생성
-  const makeId = () => {
-    return Math.random().toString(36).substring(2, 16);
-  };
-  const id = makeId();
-
   //데이터 조회
   const queryClient = useQueryClient();
   const mutation = useMutation(addBoard, {
@@ -28,7 +22,6 @@ function Board() {
     if (title.trim() === "" || content.trim() === "")
       return alert("빈칸을 채워주세요!");
     const newBoard = {
-      id: id,
       // username:username,
       title: title,
       images: imgView,
@@ -40,6 +33,10 @@ function Board() {
     setContent("");
     navigate("/");
   };
+
+  // const blob = new Blob(imgView);
+  // const objectURL = URL.createObjectURL(blob);
+
   //미리보기 구현
   const [imgView, setImgView] = useState([]);
   // const Time = moment().fromNow()
