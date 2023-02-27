@@ -4,14 +4,12 @@ import Header from "../components/Header";
 import { useState } from 'react'
 
 export default function App() {
-  let loginid = document.querySelector('#loginid');
+  let username = document.querySelector('#username');
 	let passwordForm = document.querySelector('#password');
-	let re_passwordForm = document.querySelector('#re_password');
 
 	const [inputs, setInputs] = useState({
-    loginid: '',
+    username: '',
 		password: '',
-		re_password: ''
   });
 
   const onChange = (e) => {//input에 name을 가진 요소의 value에 이벤트를 걸었다
@@ -31,14 +29,14 @@ export default function App() {
   };
 	
 	function letsJoin() { //로그인 유효성 검사
-    if(inputs.loginid===""){
+    if(inputs.username===""){
       alert("아이디를 입력해주세요!");
-      loginid.focus();
+      username.focus();
       return;
     }
-    else if(CheckPassid(inputs.loginid) === false){
+    else if(CheckPassid(inputs.username) === false){
       alert("아이디는 4자 이상의 영소문자, 숫자만 가능합니다.");
-      loginid.focus();
+      username.focus();
       return;
     }
     else if(inputs.password===""){
@@ -51,25 +49,15 @@ export default function App() {
       passwordForm.focus();
       return;
     }
-    else if(inputs.re_password===""){
-      alert("비밀번호 중복 확인을 입력해주세요!");
-      re_passwordForm.focus();
-      return;
-    }
-    else if(inputs.re_password !==inputs.password){
-      alert("비밀번호가 동일하지 않습니다!");
-      re_passwordForm.focus();
-      return;
-    }
-
     else{
-      fetch("/api/signup", { //백엔드랑 협의된 주소 입력
+      fetch("http://13.125.211.170:8080/api/user/signup", { //백엔드랑 협의된 주소 입력
         method: 'post',
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'Accept': 'application/json'
         },
         body : JSON.stringify({
-          loginid : inputs.loginid,
+          username : inputs.username,
           password : inputs.password,
         })
       }).then(res => res.json())
@@ -93,8 +81,8 @@ export default function App() {
     <h2>회원가입</h2>
 
     <input type="text" 
-    id="loginid" 
-    name="loginid" 
+    id="username" 
+    name="username" 
     onChange={onChange}  
     placeholder="아이디" 
     />
@@ -105,12 +93,6 @@ export default function App() {
     onChange={onChange} 
     placeholder="비밀번호"
     />
-
-    <input type="password" 
-    id="re_password" 
-    name="re_password" 
-    onChange={onChange} 
-    placeholder="비밀번호 확인"/>
 
     <input type="button" 
     className="button medium primary"  
