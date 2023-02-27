@@ -25,7 +25,7 @@ export default function App() {
 			return;
 		}
     else if(inputs.password==="false"){
-			alert("비밀번호를 입력해주세요");
+			alert("비밀번호가 틀렸습니다.");
 			return;
 		}
     else{

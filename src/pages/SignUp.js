@@ -46,15 +46,14 @@ export default function App() {
       passwordForm.focus();
       return;
     }
-    else if(inputs.re_password===""){
-      alert("비밀번호 중복 확인을 입력해주세요!");
-      re_passwordForm.focus();
-      return;
-    }
-    
     else if(CheckPass(inputs.password) === false){
       alert("비밀번호는 8자 이상의 영대소문자, 숫자만 가능합니다.");
       passwordForm.focus();
+      return;
+    }
+    else if(inputs.re_password===""){
+      alert("비밀번호 중복 확인을 입력해주세요!");
+      re_passwordForm.focus();
       return;
     }
     else if(inputs.re_password !==inputs.password){
