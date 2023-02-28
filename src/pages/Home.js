@@ -17,18 +17,20 @@ function Home() {
         <Wrap>
           {data?.map((item) => {
             return (
-              <CleanBox
-                key={item.id}
-                onClick={() => {
-                  navigate(`/main/${item.id}`);
-                }}
-              >
+              <CleanBox>
                 <ImgBox>
                   <ImgView src={item.imgUrl} alt="img" />
                   <Count>1</Count>
                   <Heart>❤︎</Heart>
                 </ImgBox>
-                <Title>{item.title}</Title>
+                <Title
+                  key={item.id}
+                  onClick={() => {
+                    navigate(`/main/${item.id}`);
+                  }}
+                >
+                  {item.title}
+                </Title>
               </CleanBox>
             );
           })}
@@ -70,6 +72,7 @@ const CleanBox = styled.div`
 const Title = styled.div`
   text-align: center;
   margin-top: 10px;
+  cursor: pointer;
 `;
 
 const ImgBox = styled.div`

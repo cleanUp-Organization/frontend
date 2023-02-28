@@ -100,7 +100,7 @@ function Board() {
           onChange={(event) => {
             setContent(event.target.value);
           }}
-          maxLength={100}
+          maxLength={200}
         />
 
         <Button>작성</Button>

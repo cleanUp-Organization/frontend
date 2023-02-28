@@ -9,9 +9,11 @@ import Comment from "../components/comment";
 import { instance } from "../api/axios";
 
 function Detail() {
-  const { id } = useParams();
-  const [detail, setDetail] = useState({});
   const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
+  const [detail, setDetail] = useState({});
+
   const queryClient = useQueryClient();
   const mutation = useMutation(deleteBoard, {
     onSuccess: () => {
@@ -28,7 +30,7 @@ function Detail() {
   useEffect(() => {
     const detailBoard = async () => {
       const { data } = await instance.get(`/api/boards/${id}`);
-      // const { data } = await axios.get(`http://localhost:4000/api/${id}`);
+      console.log(data);
       return data;
     };
     detailBoard().then((result) => setDetail(result));
@@ -145,7 +147,7 @@ function Detail() {
             )}
           </div>
         </TitleBox>
-        <img src={detail.images} alt="img" />
+        <img src={detail.imgUrl} alt="img" />
         <p>{detail.content}</p>
         <Line></Line>
         <div>{/* <Comment /> */}</div>
