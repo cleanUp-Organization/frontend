@@ -29,99 +29,16 @@ function Board() {
     event.preventDefault();
     if (title.trim() === "" || content.trim() === "")
       return alert("빈칸을 채워주세요!");
-    // const newBoard = {
-    //   // username:username,
-    //   title: title,
-    //   content: content,
-    //   images: imgView,
-    // };
-    // mutation.mutate(newBoard);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
     formData.append("imgUrl", file);
-    // const newBoard = [
-    //   {
-    //     title: formData.append("title", title),
-    //     content: formData.append("content", content),
-    //   },
-    // ];
-    // formData.append(
-    //   "data",
-    //   new Blob([JSON.stringify(newBoard)], { type: "application/json" })
-    // );
-    // console.log(
-    //   formData.get("title"),
-    //   formData.get("content"),
-    //   formData.get("file")
-    // );
     mutation.mutate(formData);
     alert(`🧹 ${title} 작성 완료!`);
     setTitle("");
     setContent("");
     navigate("/main");
   };
-
-  // 데이터등록 #2
-  // const onSubmitHandler = (event) => {
-  //   event.preventDefault();
-  //   if (title.trim() === "" || content.trim() === "")
-  //     return alert("빈칸을 채워주세요!");
-  //   // const newBoard = {
-  //   //   // username:username,
-  //   //   title: title,
-  //   //   content: content,
-  //   //   images: imgView,
-  //   // };
-  //   // mutation.mutate(newBoard);
-  //   const formData = new FormData();
-  //   // formData.append("title", title);
-  //   // formData.append("content", content);
-  //   // formData.append("imgUrl", file);
-  //   formData.append("file", file);
-  //   formData.append("title", title);
-  //   formData.append("content", content);
-  //   axios.post("http://13.125.211.170:8080/api/board", formData, {
-  //     headers: {
-  //       "Contest-Type": "multipart/form-data",
-  //     },
-  //   });
-  //   console.log(
-  //     formData.get("title"),
-  //     formData.get("content"),
-  //     formData.get("file")
-  //   );
-  //   // mutation.mutate(formData);
-  //   alert(`🧹 ${title} 작성 완료!`);
-  //   setTitle("");
-  //   setContent("");
-  //   navigate("/main");
-  // };
-
-  // // 데이터 등록 #4
-  // const onSubmitHandler = (event) => {
-  //   event.preventDefault();
-  //   if (title.trim() === "" || content.trim() === "")
-  //     return alert("빈칸을 채워주세요!");
-  //   const formData = new FormData();
-  //   formData.append("images", imgView[0]);
-  //   const newBoard = [
-  //     {
-  //       title: formData.append("title", title),
-  //       content: formData.append("content", content),
-  //     },
-  //   ];
-  //   formData.append(
-  //     "data",
-  //     new Blob([JSON.stringify(newBoard)], { type: "application/json" })
-  //   );
-  //   mutation.mutate(formData);
-  //   console.log(formData.get("data"));
-  //   alert(`🧹 ${title} 작성 완료!`);
-  //   setTitle("");
-  //   setContent("");
-  //   navigate("/");
-  // };
 
   //이미지 구현
   const fileInput = React.useRef(null);
@@ -183,7 +100,7 @@ function Board() {
           onChange={(event) => {
             setContent(event.target.value);
           }}
-          maxLength={100}
+          maxLength={200}
         />
 
         <Button>작성</Button>
