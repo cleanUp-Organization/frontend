@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -9,7 +9,8 @@ import { deleteComment } from "../api/clean";
 function Comments() {
   const { id } = useParams();
   const { data } = useQuery("clean", getBoard);
-  const target = data?.filter((item) => item.id === id)[0]["comments"];
+  console.log(data);
+  const target = data?.filter((item) => item.id === id)[0].commentList;
 
   //삭제
   const queryClient = useQueryClient();

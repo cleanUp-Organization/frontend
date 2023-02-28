@@ -13,12 +13,15 @@ function Detail() {
   const { id } = useParams();
   const [detail, setDetail] = useState({});
 
+  //삭제
   const queryClient = useQueryClient();
   const mutation = useMutation(deleteBoard, {
     onSuccess: () => {
       queryClient.invalidateQueries("clean");
     },
   });
+
+  //수정
   const updateMutation = useMutation(updateBoard, {
     onSuccess: () => {
       queryClient.invalidateQueries("clean");
@@ -29,11 +32,12 @@ function Detail() {
   useEffect(() => {
     const detailBoard = async () => {
       const { data } = await instance.get(`/api/boards/${id}`);
-      console.log(data);
+      console.log(data.commentList);
       return data;
     };
     detailBoard().then((result) => setDetail(result));
   }, [id]);
+
   //삭제
   const deleteHandler = (id) => {
     const message = window.confirm("기록을 삭제하시겠습니까?");
@@ -149,7 +153,9 @@ function Detail() {
         <img src={detail.imgUrl} alt="img" />
         <p>{detail.content}</p>
         <Line></Line>
-        <div>{/* <Comment /> */}</div>
+        <div>
+          <Comment />
+        </div>
       </Wrap>
     </>
   );
