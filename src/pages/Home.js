@@ -24,7 +24,7 @@ function Home() {
                 }}
               >
                 <ImgBox>
-                  <ImgView src={item.images} alt="img" />
+                  <ImgView src={item.imgUrl} alt="img" />
                   <Count>1</Count>
                   <Heart>❤︎</Heart>
                 </ImgBox>
