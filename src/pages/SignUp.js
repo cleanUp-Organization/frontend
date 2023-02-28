@@ -2,12 +2,11 @@ import React from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function App() {
   let username = document.querySelector("#username");
   let passwordForm = document.querySelector("#password");
-  const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -72,7 +71,6 @@ export default function App() {
             alert("회원가입에 실패하였습니다.");
           }
         });
-      navigate("/login");
     }
   }
 

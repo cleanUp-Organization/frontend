@@ -3,12 +3,11 @@ import Layout from "../components/Layout";
 import Header from "../components/Header";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export default function App() {
   let username = document.querySelector("#username");
   let password = document.querySelector("#password"); //아이디 중복 확인 버튼
-  const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -38,27 +37,26 @@ export default function App() {
         body: JSON.stringify({
           username: inputs.username,
           password: inputs.password,
-          Authorization: inputs.Authorization,
         }),
       })
         .then((res) => res.json())
         .then((response) => {
-          // console.log(response.Authorization);
-          console.log(response.jwtUtill);
+          console.log(response.Authorization);
           if (response.statusCode === "OK") {
             // 로그인 성공시
             alert("로그인 성공");
-            navigate("/");
-            const accessToken = response.jwtUtill;
-            console.log(accessToken);
+
+            const { accessToken } = response.data;
             // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-            axios.defaults.headers.common["jwtUtill"] = `Bearer ${accessToken}`;
+            axios.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${accessToken}`;
 
             window.localStorage.setItem(
-              "jwtUtill",
-              response.jwtUtill.split(" ")[2]
+              "Authorization",
+              response.Authorization
             );
-            // window.location.href = "/";
+            window.location.href = "/home";
           } else {
             // 로그인 실패시
             alert("사용자가 존재하지 않습니다.");
