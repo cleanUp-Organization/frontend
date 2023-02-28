@@ -11,7 +11,6 @@ import { instance } from "../api/axios";
 function Detail() {
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
   const [detail, setDetail] = useState({});
 
   const queryClient = useQueryClient();
@@ -35,12 +34,12 @@ function Detail() {
     };
     detailBoard().then((result) => setDetail(result));
   }, [id]);
-
   //삭제
   const deleteHandler = (id) => {
     const message = window.confirm("기록을 삭제하시겠습니까?");
     if (message) {
       mutation.mutate(id);
+      console.log(id);
       navigate("/main");
     } else {
       return;
