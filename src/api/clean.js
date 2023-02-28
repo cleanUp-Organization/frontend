@@ -94,12 +94,12 @@ const deleteBoard = async (id) => {
 //     });
 // };
 
-const updateBoard = async (payload) => {
+const updateBoard = async (formData) => {
   await baseURL
-    .put(`/api/boards/${payload.id}`, {
-      title: payload.title,
-      imgUrl: payload.imgUrl,
-      content: payload.content,
+    .put(`/api/boards/${formData.id}`, {
+      title: formData.title,
+      imgUrl: formData.imgUrl,
+      content: formData.content,
     })
     .then((response) => {
       if (response.statusCode === "OK") {
@@ -128,9 +128,16 @@ const getComment = async (id) => {
   return response.data;
 };
 
-const addComment = async (id, newComment) => {
+const addComment = async (id) => {
+  console.log(id);
   await baseURL
-    .post(`/api/boards/${id}/comments`, newComment, config)
+    .post(
+      `/api/boards/${id.id}/comments`,
+      {
+        contents: id.contents,
+      },
+      config
+    )
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);
@@ -142,23 +149,23 @@ const addComment = async (id, newComment) => {
       }
     });
 };
-// const addComment = async (newComment) => {
-//   await baseURL
-//     .post(`/api/comment/${newComment.target}`, newComment)
-//     .then((response) => {
-//       if (response.statusCode === "OK") {
-//         alert(response.msg);
-//       }
-//     })
-//     .catch((error) => {
-//       if (error.statusCode === "UNAUTHORIZED") {
-//         alert(error.msg);
-//       }
-//     });
-// };
 
 const deleteComment = async (id) => {
-  await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/${id}`);
+  console.log(id);
+  await baseURL
+    .delete(`/api/boards/comments/${id}`, config)
+    .then((response) => {
+      if (response.statusCode === "OK") {
+        alert(response.msg);
+      }
+    })
+    .catch((error) => {
+      if (error.statusCode === "UNAUTHORIZED") {
+        alert(error.msg);
+      } else if (error.statusCode === "BAD_REQUEST") {
+        alert(error.msg);
+      }
+    });
 };
 export {
   getBoard,

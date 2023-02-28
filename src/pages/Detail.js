@@ -53,15 +53,26 @@ function Detail() {
 
   //수정
   const [open, setOpen] = useState(false);
-  const onToggle = () => setOpen(!open);
-  const [updateTitle, setUpdateTitle] = useState(detail.title);
-  const [updateContent, setUpdateContent] = useState(detail.content);
+
+  const [updateTitle, setUpdateTitle] = useState("");
+  const [updateContent, setUpdateContent] = useState("");
   const [imgView, setImgView] = useState([]);
+  const [file, setFile] = useState();
+
+  const onToggle = () => {
+    setOpen(!open);
+    setImgView(detail.imgUrl);
+    setUpdateTitle(detail.title);
+    setUpdateContent(detail.content);
+  };
+
   const fileInput = React.useRef(null);
+
   const onImgButton = (event) => {
     event.preventDefault();
     fileInput.current.click();
   };
+
   const onImgHandler = (event) => {
     setImgView([]);
     for (let i = 0; i < event.target.files.length; i++) {
@@ -78,19 +89,20 @@ function Detail() {
       }
     }
   };
-  const updateHandler = () => {
+  const updateHandler = (event) => {
+    event.preventDefault();
     const message = window.confirm("기록을 수정하시겠습니까?");
     if (!message) {
       return;
     } else {
-      const payload = {
-        id: id,
-        title: updateTitle,
-        content: updateContent,
-        images: imgView,
-      };
-      updateMutation.mutate(payload);
-      setDetail(payload);
+      const formData = new FormData();
+      formData.append("title", updateTitle);
+      formData.append("content", updateContent);
+      formData.append("imgUrl", file);
+      updateMutation.mutate(formData);
+      setUpdateTitle("");
+      setUpdateContent("");
+      setDetail(formData);
       onToggle();
       alert("수정 완료!");
     }
@@ -117,11 +129,11 @@ function Detail() {
                       }}
                     />
                     <button onClick={onImgButton}>파일 업로드</button>
-                    <div>
+                    {/* <div>
                       {imgView?.map((item) => {
                         return <ImgBox src={item} alt="img" />;
                       })}
-                    </div>
+                    </div> */}
                     <input
                       type="file"
                       accept="image/*"
