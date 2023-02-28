@@ -48,7 +48,7 @@ export default function App() {
           if (response.statusCode === "OK") {
             // 로그인 성공시
             alert("로그인 성공");
-            navigate("/");
+            navigate("/main");
             const accessToken = response.jwtUtill;
             console.log(accessToken);
             // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정

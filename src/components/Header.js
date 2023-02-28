@@ -32,7 +32,7 @@ function Header() {
       <AiFillHome
         style={homeStyle}
         onClick={() => {
-          navigate("/");
+          navigate("/main");
         }}
       />
       <TitleBox>

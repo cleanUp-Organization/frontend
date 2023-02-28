@@ -72,7 +72,7 @@ export default function App() {
             alert("회원가입에 실패하였습니다.");
           }
         });
-      navigate("/login");
+      navigate("/");
     }
   }
 

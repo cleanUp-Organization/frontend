@@ -56,7 +56,7 @@ function Board() {
     alert(`🧹 ${title} 작성 완료!`);
     setTitle("");
     setContent("");
-    navigate("/");
+    navigate("/main");
   };
 
   // // 데이터 등록 #2
