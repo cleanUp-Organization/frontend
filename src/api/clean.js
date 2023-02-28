@@ -9,7 +9,7 @@ import { baseURL } from "./axios";
 //   headers: { Authorization: `Bearer ${access_token}` },
 // });
 
-const access_token = localStorage.getItem("jwtUtil");
+const access_token = localStorage.getItem("token");
 const config = {
   headers: {
     Authorization: `Bearer ${access_token}`,
@@ -21,6 +21,7 @@ const getBoard = async () => {
   const response = await instance.get("/api/boards");
   return response.data;
 };
+
 // const getBoard = async () => {
 //   const response = await instance.get("/api");
 //   return response.data;

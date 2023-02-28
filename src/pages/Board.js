@@ -35,6 +35,7 @@ function Board() {
     formData.append("imgUrl", file);
     mutation.mutate(formData);
     alert(`🧹 ${title} 작성 완료!`);
+    console.log("작성완료");
     setTitle("");
     setContent("");
     navigate("/main");
