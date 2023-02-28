@@ -31,7 +31,8 @@ function Comment() {
     event.preventDefault();
     const newComment = {
       id: id,
-      contents: [...(detail.commentList || []), { nickname, comment }],
+      contents: comment,
+      username: nickname,
     };
     mutation.mutate(newComment);
     alert("댓글 등록 완료!");

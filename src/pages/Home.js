@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { getBoard } from "../api/clean";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const { data } = useQuery("clean", getBoard);
   const navigate = useNavigate();
+
   return (
     <>
       <Layout>

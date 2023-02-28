@@ -55,7 +55,7 @@ export default function App() {
             axios.defaults.headers.common["jwtUtil"] = `Bearer ${accessToken}`;
 
             window.localStorage.setItem(
-              "jwtUtil",
+              "token",
               response.jwtUtil.split(" ")[2]
             );
             // window.location.href = "/";
