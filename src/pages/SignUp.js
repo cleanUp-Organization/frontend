@@ -51,7 +51,7 @@ export default function App() {
       passwordForm.focus();
       return;
     } else {
-      fetch("http://13.125.211.170:8080/api/user/signup", {
+      fetch("http://13.209.14.99:8080/api/users/signup", {
         //백엔드랑 협의된 주소 입력
         method: "post",
         headers: {

@@ -27,7 +27,7 @@ function Detail() {
   //상세페이지 조회
   useEffect(() => {
     const detailBoard = async () => {
-      const { data } = await instance.get(`/api/board/${id}`);
+      const { data } = await instance.get(`/api/boards/${id}`);
       // const { data } = await axios.get(`http://localhost:4000/api/${id}`);
       return data;
     };
