@@ -49,7 +49,7 @@ function Comment() {
       queryClient.invalidateQueries("clean");
     },
   });
-  const onDeleteHandler = (id) => {
+  const commentDeleteHandler = (id) => {
     const message = window.confirm("댓글을 삭제하시겠습니까?");
     console.log(id);
     if (message) {
@@ -97,7 +97,9 @@ function Comment() {
                   <NameBox>{item.username}</NameBox>
                   <div>{item.contents}</div>
                 </UserComments>
-                <DButton onChange={() => onDeleteHandler(id)}>삭제</DButton>
+                <DButton onClick={() => commentDeleteHandler(item.id)}>
+                  삭제
+                </DButton>
               </CommentBox>
             );
           })}
