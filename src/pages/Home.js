@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import { useMutation, useQuery } from "react-query";
@@ -8,8 +8,13 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { data } = useQuery("clean", getBoard);
+  // const { data } = useQuery("clean", getBoard,{
+  //   onSuccess:(response) => {
+  //     setList(response.data.response)
+  //   }
+  // });
   const navigate = useNavigate();
-
+  // const [list, setList] = useState([])
   return (
     <>
       <Layout>

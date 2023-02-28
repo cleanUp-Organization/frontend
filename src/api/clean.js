@@ -94,12 +94,12 @@ const deleteBoard = async (id) => {
 //     });
 // };
 
-const updateBoard = async (payload) => {
+const updateBoard = async (formData) => {
   await baseURL
-    .put(`/api/boards/${payload.id}`, {
-      title: payload.title,
-      imgUrl: payload.imgUrl,
-      content: payload.content,
+    .put(`/api/boards/${formData.id}`, {
+      title: formData.title,
+      imgUrl: formData.imgUrl,
+      content: formData.content,
     })
     .then((response) => {
       if (response.statusCode === "OK") {
@@ -128,9 +128,16 @@ const getComment = async (id) => {
   return response.data;
 };
 
-const addComment = async (id, newComment) => {
+const addComment = async (id) => {
+  console.log(id);
   await baseURL
-    .post(`/api/boards/${id}/comments`, newComment, config)
+    .post(
+      `/api/boards/${id.id}/comments`,
+      {
+        contents: id.contents,
+      },
+      config
+    )
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);
