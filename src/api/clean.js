@@ -62,7 +62,7 @@ const addBoard = async (formData) => {
 
 const deleteBoard = async (id) => {
   await baseURL
-    .delete(`/api/boards/${id}`)
+    .delete(`/api/boards/${id}`, config)
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);
@@ -97,7 +97,7 @@ const updateBoard = async (payload) => {
   await baseURL
     .put(`/api/boards/${payload.id}`, {
       title: payload.title,
-      images: payload.img,
+      imgUrl: payload.imgUrl,
       content: payload.content,
     })
     .then((response) => {
@@ -127,8 +127,19 @@ const getComment = async (id) => {
   return response.data;
 };
 
-const addComment = async (newComment, payload) => {
-  await baseURL.post(`/api/comment/${payload.id}`, newComment);
+const addComment = async (id, newComment) => {
+  await baseURL
+    .post(`/api/boards/${id}/comments`, newComment, config)
+    .then((response) => {
+      if (response.statusCode === "OK") {
+        alert(response.msg);
+      }
+    })
+    .catch((error) => {
+      if (error.statusCode === "UNAUTHORIZED") {
+        alert(error.msg);
+      }
+    });
 };
 // const addComment = async (newComment) => {
 //   await baseURL

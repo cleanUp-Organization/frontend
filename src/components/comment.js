@@ -1,25 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { addComment, getBoard } from "../api/clean";
 import Comments from "./Comments";
+import { instance } from "../api/axios";
 
 function Comment() {
   const { id } = useParams();
   const { data } = useQuery("clean", getBoard);
-  const target = data?.filter((item) => item.id === id)[0];
+  // const target = data?.filter((item) => item.id === id)[0].commentList;
+
+  //댓글 조회
+  const [detail, setDetail] = useState({});
+  useEffect(() => {
+    const detailBoard = async () => {
+      const { data } = await instance.get(`/api/boards/${id}`);
+      return data.commentList;
+    };
+    detailBoard().then((result) => setDetail(result));
+  }, [id]);
+
   const [nickname, setNickname] = useState("");
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
+
   const mutation = useMutation(addComment, {
     onSuccess: () => queryClient.invalidateQueries("clean"),
   });
   const onSubmitHandler = (event) => {
     event.preventDefault();
     const newComment = {
-      target: id,
-      comments: [...(target.comments || []), { nickname, comment }],
+      id: id,
+      commentents: [...(detail.commentList || []), { nickname, comment }],
     };
     mutation.mutate(newComment);
     alert("댓글 등록 완료!");
@@ -52,7 +65,7 @@ function Comment() {
         </form>
         {/* <CounterBox>댓글 {Count}</CounterBox> */}
       </WrapBox>
-      <Comments />
+      <div>{detail.contents}</div>
     </div>
   );
 }

@@ -11,15 +11,17 @@ import { instance } from "../api/axios";
 function Detail() {
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
   const [detail, setDetail] = useState({});
 
+  //삭제
   const queryClient = useQueryClient();
   const mutation = useMutation(deleteBoard, {
     onSuccess: () => {
       queryClient.invalidateQueries("clean");
     },
   });
+
+  //수정
   const updateMutation = useMutation(updateBoard, {
     onSuccess: () => {
       queryClient.invalidateQueries("clean");
@@ -30,7 +32,7 @@ function Detail() {
   useEffect(() => {
     const detailBoard = async () => {
       const { data } = await instance.get(`/api/boards/${id}`);
-      console.log(data);
+      console.log(data.commentList);
       return data;
     };
     detailBoard().then((result) => setDetail(result));
@@ -39,8 +41,10 @@ function Detail() {
   //삭제
   const deleteHandler = (id) => {
     const message = window.confirm("기록을 삭제하시겠습니까?");
+    console.log(id);
     if (message) {
       mutation.mutate(id);
+      console.log(id);
       navigate("/main");
     } else {
       return;
@@ -98,7 +102,7 @@ function Detail() {
         <TitleBox>
           <h3>{detail.title}</h3>
           <div>
-            <Button onClick={() => deleteHandler(detail.id)}>삭제</Button>
+            <Button onClick={() => deleteHandler(id)}>삭제</Button>
             <Button onClick={onToggle}>수정</Button>
             {open && (
               <UpdateWrap>
@@ -150,7 +154,9 @@ function Detail() {
         <img src={detail.imgUrl} alt="img" />
         <p>{detail.content}</p>
         <Line></Line>
-        <div>{/* <Comment /> */}</div>
+        <div>
+          <Comment />
+        </div>
       </Wrap>
     </>
   );
