@@ -19,7 +19,6 @@ console.log(access_token, config);
 
 const getBoard = async () => {
   const response = await instance.get("/api/boards");
-  console.log(config);
   return response.data;
 };
 // const getBoard = async () => {
@@ -29,7 +28,12 @@ const getBoard = async () => {
 
 const addBoard = async (newBoard) => {
   await baseURL
-    .post("/api/board", newBoard, config)
+    .post("/api/board", newBoard, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": `multipart/form-data; `,
+      },
+    })
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);

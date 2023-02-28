@@ -14,6 +14,7 @@ function Board() {
       queryClient.invalidateQueries("clean");
     },
   });
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imgView, setImgView] = useState([]);

@@ -96,6 +96,7 @@ export default function App() {
         id="loginBtn"
         value="로그인"
       />
+      <button onClick={() => navigate("/signup")}>회원가입</button>
     </Layout>
   );
 }
