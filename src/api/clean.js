@@ -127,8 +127,19 @@ const getComment = async (id) => {
   return response.data;
 };
 
-const addComment = async (newComment, payload) => {
-  await baseURL.post(`/api/comment/${payload.id}`, newComment);
+const addComment = async (id, newComment) => {
+  await baseURL
+    .post(`/api/boards/${id}/comments`, newComment, config)
+    .then((response) => {
+      if (response.statusCode === "OK") {
+        alert(response.msg);
+      }
+    })
+    .catch((error) => {
+      if (error.statusCode === "UNAUTHORIZED") {
+        alert(error.msg);
+      }
+    });
 };
 // const addComment = async (newComment) => {
 //   await baseURL
