@@ -149,23 +149,23 @@ const addComment = async (id) => {
       }
     });
 };
-// const addComment = async (newComment) => {
-//   await baseURL
-//     .post(`/api/comment/${newComment.target}`, newComment)
-//     .then((response) => {
-//       if (response.statusCode === "OK") {
-//         alert(response.msg);
-//       }
-//     })
-//     .catch((error) => {
-//       if (error.statusCode === "UNAUTHORIZED") {
-//         alert(error.msg);
-//       }
-//     });
-// };
 
 const deleteComment = async (id) => {
-  await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/${id}`);
+  console.log(id);
+  await baseURL
+    .delete(`/api/boards/comments/${id}`, config)
+    .then((response) => {
+      if (response.statusCode === "OK") {
+        alert(response.msg);
+      }
+    })
+    .catch((error) => {
+      if (error.statusCode === "UNAUTHORIZED") {
+        alert(error.msg);
+      } else if (error.statusCode === "BAD_REQUEST") {
+        alert(error.msg);
+      }
+    });
 };
 export {
   getBoard,

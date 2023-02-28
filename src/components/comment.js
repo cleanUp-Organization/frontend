@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { addComment, getBoard } from "../api/clean";
+import { addComment, deleteComment, getBoard } from "../api/clean";
 import { instance } from "../api/axios";
 import { FaCommentDots } from "react-icons/fa";
 
@@ -24,6 +24,7 @@ function Comment() {
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
 
+  //댓글 추가
   const mutation = useMutation(addComment, {
     onSuccess: () => queryClient.invalidateQueries("clean"),
   });
@@ -42,6 +43,22 @@ function Comment() {
   //   const Count = target.comments.length;
   //   console.log(Count);
 
+  //댓글 삭제
+  const delMutation = useMutation(deleteComment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("clean");
+    },
+  });
+  const onDeleteHandler = (id) => {
+    const message = window.confirm("댓글을 삭제하시겠습니까?");
+    console.log(id);
+    if (message) {
+      delMutation.mutate(id);
+      console.log(id);
+    } else {
+      return;
+    }
+  };
   const style = {
     width: "20px",
     height: "20px",
@@ -80,7 +97,7 @@ function Comment() {
                   <NameBox>{item.username}</NameBox>
                   <div>{item.contents}</div>
                 </UserComments>
-                <DButton>삭제</DButton>
+                <DButton onChange={() => onDeleteHandler(id)}>삭제</DButton>
               </CommentBox>
             );
           })}
