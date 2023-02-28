@@ -4,14 +4,9 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { addBoard } from "../api/clean";
 import { useNavigate } from "react-router-dom";
+import { type } from "@testing-library/user-event/dist/type";
 
 function Board() {
-  //랜덤 아이디 생성
-  const makeId = () => {
-    return Math.random().toString(36).substring(2, 16);
-  };
-  const id = makeId();
-
   //데이터 조회
   const queryClient = useQueryClient();
   const mutation = useMutation(addBoard, {
@@ -21,28 +16,74 @@ function Board() {
   });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [imgView, setImgView] = useState([]);
+  const [file, setFile] = useState();
   const navigate = useNavigate();
-  //데이터 등록
+
+  // 데이터 등록 #1
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (title.trim() === "" || content.trim() === "")
       return alert("빈칸을 채워주세요!");
-    const newBoard = {
-      id: id,
-      // username:username,
-      title: title,
-      images: imgView,
-      content: content,
-    };
-    mutation.mutate(newBoard);
+    // const newBoard = {
+    //   // username:username,
+    //   title: title,
+    //   content: content,
+    //   images: imgView,
+    // };
+    // mutation.mutate(newBoard);
+    const formData = new FormData();
+    // formData.append("title", title);
+    // formData.append("content", content);
+    // formData.append("imgUrl", file);
+    formData.append("file", file);
+    const newBoard = [
+      {
+        title: formData.append("title", title),
+        content: formData.append("content", content),
+      },
+    ];
+    formData.append(
+      "data",
+      new Blob([JSON.stringify(newBoard)], { type: "application/json" })
+    );
+    console.log(
+      formData.get("title"),
+      formData.get("content"),
+      formData.get("file")
+    );
+    mutation.mutate(formData);
     alert(`🧹 ${title} 작성 완료!`);
     setTitle("");
     setContent("");
     navigate("/");
   };
-  //미리보기 구현
-  const [imgView, setImgView] = useState([]);
-  // const Time = moment().fromNow()
+
+  // // 데이터 등록 #2
+  // const onSubmitHandler = (event) => {
+  //   event.preventDefault();
+  //   if (title.trim() === "" || content.trim() === "")
+  //     return alert("빈칸을 채워주세요!");
+  //   const formData = new FormData();
+  //   formData.append("images", imgView[0]);
+  //   const newBoard = [
+  //     {
+  //       title: formData.append("title", title),
+  //       content: formData.append("content", content),
+  //     },
+  //   ];
+  //   formData.append(
+  //     "data",
+  //     new Blob([JSON.stringify(newBoard)], { type: "application/json" })
+  //   );
+  //   mutation.mutate(formData);
+  //   console.log(formData.get("data"));
+  //   alert(`🧹 ${title} 작성 완료!`);
+  //   setTitle("");
+  //   setContent("");
+  //   navigate("/");
+  // };
+
   //이미지 구현
   const fileInput = React.useRef(null);
   const onImgButton = (event) => {
@@ -53,6 +94,7 @@ function Board() {
     setImgView([]);
     for (let i = 0; i < event.target.files.length; i++) {
       if (event.target.files[i]) {
+        setFile(event.target.files[i]);
         let reader = new FileReader();
         reader.readAsDataURL(event.target.files[i]);
         reader.onloadend = () => {
@@ -65,18 +107,7 @@ function Board() {
       }
     }
   };
-  // const addImg = async ()=>{
-  //   const fd = new FormData()
-  // }
 
-  // const onImgHandler = async (event) => {
-  //   const formData = new FormData();
-  //   formData.append("file", event.target.files[0]);
-  //   const response = await axios.post(
-  //     "${process.env.REACT_APP_SERVER_URL}/api",
-  //     formData
-  //   );
-  // };
   return (
     <>
       <Header />
@@ -90,7 +121,7 @@ function Board() {
         <input
           type="file"
           accept="image/*"
-          name="fileUpload"
+          id="fileUpload"
           style={{ display: "none" }}
           ref={fileInput}
           onChange={onImgHandler}

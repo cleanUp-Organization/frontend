@@ -10,7 +10,7 @@ function Comments() {
   const { id } = useParams();
   const { data } = useQuery("clean", getBoard);
   const target = data?.filter((item) => item.id === id)[0]["comments"];
-  console.log(target);
+
   //삭제
   const queryClient = useQueryClient();
   const mutation = useMutation(deleteComment, {

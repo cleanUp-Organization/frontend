@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteBoard, updateBoard } from "../api/clean";
 import Comment from "../components/comment";
+import { instance } from "../api/axios";
 
 function Detail() {
   const { id } = useParams();
@@ -26,7 +27,8 @@ function Detail() {
   //상세페이지 조회
   useEffect(() => {
     const detailBoard = async () => {
-      const { data } = await axios.get(`http://localhost:4000/api/${id}`);
+      const { data } = await instance.get(`/api/board/${id}`);
+      // const { data } = await axios.get(`http://localhost:4000/api/${id}`);
       return data;
     };
     detailBoard().then((result) => setDetail(result));
@@ -48,6 +50,28 @@ function Detail() {
   const onToggle = () => setOpen(!open);
   const [updateTitle, setUpdateTitle] = useState(detail.title);
   const [updateContent, setUpdateContent] = useState(detail.content);
+  const [imgView, setImgView] = useState([]);
+  const fileInput = React.useRef(null);
+  const onImgButton = (event) => {
+    event.preventDefault();
+    fileInput.current.click();
+  };
+  const onImgHandler = (event) => {
+    setImgView([]);
+    for (let i = 0; i < event.target.files.length; i++) {
+      if (event.target.files[i]) {
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files[i]);
+        reader.onloadend = () => {
+          const base = reader.result;
+          if (base) {
+            const baseSub = base.toString();
+            setImgView((imgView) => [...imgView, baseSub]);
+          }
+        };
+      }
+    }
+  };
   const updateHandler = () => {
     const message = window.confirm("기록을 수정하시겠습니까?");
     if (!message) {
@@ -56,8 +80,8 @@ function Detail() {
       const payload = {
         id: id,
         title: updateTitle,
-        // images: images,
         content: updateContent,
+        images: imgView,
       };
       updateMutation.mutate(payload);
       setDetail(payload);
@@ -86,7 +110,21 @@ function Detail() {
                         setUpdateTitle(event.target.value);
                       }}
                     />
-                    <ImgBox>이미지 박스</ImgBox>
+                    <button onClick={onImgButton}>파일 업로드</button>
+                    <div>
+                      {imgView?.map((item) => {
+                        return <ImgBox src={item} alt="img" />;
+                      })}
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      name="fileUpload"
+                      // value={updateImg || ""}
+                      style={{ display: "none" }}
+                      ref={fileInput}
+                      onChange={onImgHandler}
+                    />
                     <ContentInput
                       type="text"
                       placeholder={detail.content}
@@ -110,9 +148,7 @@ function Detail() {
         <img src={detail.images} alt="img" />
         <p>{detail.content}</p>
         <Line></Line>
-        <div>
-          <Comment />
-        </div>
+        <div>{/* <Comment /> */}</div>
       </Wrap>
     </>
   );
