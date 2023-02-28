@@ -41,6 +41,7 @@ function Detail() {
   //삭제
   const deleteHandler = (id) => {
     const message = window.confirm("기록을 삭제하시겠습니까?");
+    console.log(id);
     if (message) {
       mutation.mutate(id);
       console.log(id);
@@ -101,7 +102,7 @@ function Detail() {
         <TitleBox>
           <h3>{detail.title}</h3>
           <div>
-            <Button onClick={() => deleteHandler(detail.id)}>삭제</Button>
+            <Button onClick={() => deleteHandler(id)}>삭제</Button>
             <Button onClick={onToggle}>수정</Button>
             {open && (
               <UpdateWrap>

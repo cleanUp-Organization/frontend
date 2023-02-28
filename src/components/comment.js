@@ -24,16 +24,17 @@ function Comment() {
   const [nickname, setNickname] = useState("");
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
+
   const mutation = useMutation(addComment, {
     onSuccess: () => queryClient.invalidateQueries("clean"),
   });
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    // const newComment = {
-    //   target: id,
-    //   comments: [...(target.comments || []), { nickname, comment }],
-    // };
-    // mutation.mutate(newComment);
+    const newComment = {
+      id: id,
+      commentents: [...(detail.commentList || []), { nickname, comment }],
+    };
+    mutation.mutate(newComment);
     alert("댓글 등록 완료!");
     setNickname("");
     setComment("");
