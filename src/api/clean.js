@@ -9,7 +9,7 @@ import { baseURL } from "./axios";
 //   headers: { Authorization: `Bearer ${access_token}` },
 // });
 
-const access_token = localStorage.getItem("jwtUtill");
+const access_token = localStorage.getItem("jwtUtil");
 const config = {
   headers: {
     Authorization: `Bearer ${access_token}`,
@@ -26,12 +26,12 @@ const getBoard = async () => {
 //   return response.data;
 // };
 
-const addBoard = async (newBoard) => {
+const addBoard = async (formData) => {
   await baseURL
-    .post("/api/board", newBoard, {
+    .post("/api/boards", formData, {
       headers: {
         Authorization: `Bearer ${access_token}`,
-        "Content-Type": `multipart/form-data; `,
+        "Contest-Type": "multipart/form-data",
       },
     })
     .then((response) => {
@@ -62,7 +62,7 @@ const addBoard = async (newBoard) => {
 
 const deleteBoard = async (id) => {
   await baseURL
-    .delete(`/api/board/${id}`)
+    .delete(`/api/boards/${id}`)
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);
@@ -95,7 +95,7 @@ const deleteBoard = async (id) => {
 
 const updateBoard = async (payload) => {
   await baseURL
-    .put(`/api/board/${payload.id}`, {
+    .put(`/api/boards/${payload.id}`, {
       title: payload.title,
       images: payload.img,
       content: payload.content,
