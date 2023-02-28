@@ -20,7 +20,7 @@ function Home() {
               <CleanBox
                 key={item.id}
                 onClick={() => {
-                  navigate(`/${item.id}`);
+                  navigate(`/main/${item.id}`);
                 }}
               >
                 <ImgBox>

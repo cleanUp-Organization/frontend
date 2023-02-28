@@ -39,7 +39,7 @@ function Detail() {
     const message = window.confirm("기록을 삭제하시겠습니까?");
     if (message) {
       mutation.mutate(id);
-      navigate("/");
+      navigate("/main");
     } else {
       return;
     }
