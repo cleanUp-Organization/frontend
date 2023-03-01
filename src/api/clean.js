@@ -95,12 +95,17 @@ const deleteBoard = async (id) => {
 // };
 
 const updateBoard = async (formData) => {
+  console.log(formData);
   await baseURL
-    .put(`/api/boards/${formData.id}`, {
-      title: formData.title,
-      imgUrl: formData.imgUrl,
-      content: formData.content,
-    })
+    .put(
+      `/api/boards/${formData.id}`,
+      {
+        title: formData.title,
+        imgUrl: formData.imgUrl,
+        content: formData.content,
+      },
+      config
+    )
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);

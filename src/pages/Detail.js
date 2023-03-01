@@ -32,7 +32,6 @@ function Detail() {
   useEffect(() => {
     const detailBoard = async () => {
       const { data } = await instance.get(`/api/boards/${id}`);
-      console.log(data.commentList);
       return data;
     };
     detailBoard().then((result) => setDetail(result));
@@ -129,11 +128,9 @@ function Detail() {
                       }}
                     />
                     <button onClick={onImgButton}>파일 업로드</button>
-                    {/* <div>
-                      {imgView?.map((item) => {
-                        return <ImgBox src={item} alt="img" />;
-                      })}
-                    </div> */}
+                    <div>
+                      <ImgBox src={file} alt="img" />;
+                    </div>
                     <input
                       type="file"
                       accept="image/*"

@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "react-query";
 import { getBoard } from "../api/clean";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Pagination from "react-js-pagination";
 
 function Home() {
   const { data } = useQuery("clean", getBoard);
@@ -15,38 +16,60 @@ function Home() {
   // });
   const navigate = useNavigate();
   // const [list, setList] = useState([])
+
+  const [page, setPage] = useState(1);
+  const [item, setItems] = useState(5);
+  const handlerPageChange = (page) => {
+    setPage(page);
+  };
+  const itemChange = (event) => {
+    setItems(Number(event.target.value));
+  };
+
+  //페이지네이션
+
   return (
     <>
       <Layout>
         <Header />
         <Nav>프로 살림꾼으로 거듭나는 꿀팁은 여기로 🔥</Nav>
         <Wrap>
-          {data?.map((item) => {
-            return (
-              <CleanBox>
-                <ImgBox>
-                  <ImgView src={item.imgUrl} alt="img" />
-                  <Count>1</Count>
-                  <Heart>❤︎</Heart>
-                </ImgBox>
-                <Title
-                  key={item.id}
-                  onClick={() => {
-                    navigate(`/main/${item.id}`);
-                  }}
-                >
-                  {item.title}
-                </Title>
-              </CleanBox>
-            );
-          })}
+          {data
+            ?.slice(item * (page - 1), item * (page - 1) + item)
+            .map((item) => {
+              return (
+                <CleanBox>
+                  <ImgBox>
+                    <ImgView src={item.imgUrl} alt="img" />
+                    <Count>1</Count>
+                    <Heart>❤︎</Heart>
+                  </ImgBox>
+                  <Title
+                    key={item.id}
+                    onClick={() => {
+                      navigate(`/main/${item.id}`);
+                    }}
+                  >
+                    {item.title}
+                  </Title>
+                </CleanBox>
+              );
+            })}
         </Wrap>
+
         <PageBox>
-          <Arrow> ◀ </Arrow>
+          {/* <Arrow> ◀ </Arrow>
           <Page>1</Page>
           <Page>2</Page>
           <Page>3</Page>
-          <Arrow> ▶</Arrow>
+          <Arrow> ▶</Arrow> */}
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={item}
+            totalItemsCount={40}
+            pageRangeDisplayed={5}
+            onChange={handlerPageChange}
+          />
         </PageBox>
       </Layout>
     </>
@@ -113,10 +136,46 @@ const Heart = styled.div`
 `;
 
 const PageBox = styled.div`
-  width: 300px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  ul.pagination li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e2e2e2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+  }
+  ul.pagination li:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+  ul.pagination li:last-child {
+    border-radius: 0 5px 5px 0;
+  }
+  ul.pagination li a {
+    text-decoration: none;
+    color: #337ab7;
+    font-size: 1rem;
+  }
+  ul.pagination li.active a {
+    color: white;
+  }
+  ul.pagination li.active {
+    background-color: #337ab7;
+  }
+  ul.pagination li a:hover,
+  ul.pagination li a.active {
+    color: blue;
+  }
 `;
 
 const Arrow = styled.button`
