@@ -8,14 +8,15 @@ import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 
 function Home() {
-  const { data } = useQuery("clean", getBoard);
-  // const { data } = useQuery("clean", getBoard,{
-  //   onSuccess:(response) => {
-  //     setList(response.data.response)
-  //   }
-  // });
+  // const { data } = useQuery("clean", getBoard);
+
+  const { data } = useQuery("clean", getBoard, {
+    onSuccess: (response) => {
+      setList(response);
+    },
+  });
   const navigate = useNavigate();
-  // const [list, setList] = useState([])
+  const [list, setList] = useState([]);
 
   const [page, setPage] = useState(1);
   const [item, setItems] = useState(5);
@@ -29,7 +30,7 @@ function Home() {
         <Header />
         <Nav>프로 살림꾼으로 거듭나는 꿀팁은 여기로 🔥</Nav>
         <Wrap>
-          {data
+          {list
             ?.slice(item * (page - 1), item * (page - 1) + item)
             .map((item) => {
               return (
