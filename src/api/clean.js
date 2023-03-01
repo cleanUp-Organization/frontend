@@ -95,14 +95,16 @@ const deleteBoard = async (id) => {
 // };
 
 const updateBoard = async (payload) => {
+  console.log(payload);
   await baseURL
-    .put(
+    .patch(
       `/api/boards/${payload.id}`,
       {
         title: payload.title,
         images: payload.imgUrl,
         content: payload.content,
       },
+
       {
         headers: {
           Authorization: `Bearer ${access_token}`,

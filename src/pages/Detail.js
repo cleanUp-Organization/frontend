@@ -106,7 +106,7 @@ function Detail() {
         imgUrl: formData.get("imgUrl"),
       };
       updateMutation.mutate(payload);
-      console.log(payload);
+      console.log(payload.imgUrl);
       setUpdateTitle("");
       setUpdateContent("");
       setDetail(payload);
