@@ -35,6 +35,7 @@ function Home() {
             .map((item) => {
               return (
                 <CleanBox>
+                  <p>작성자 : {item.username}</p>
                   <ImgBox>
                     <ImgView src={item.imgUrl} alt="img" />
                     <Count>1</Count>
