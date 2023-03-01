@@ -122,9 +122,16 @@ function Detail() {
     <>
       <Header />
       <Wrap>
-        <User>작성자 : {detail.username}</User>
+        <User>
+          <div>작성자 : {detail.username} </div>{" "}
+          <div>날짜: {detail.createdAt}</div>
+        </User>
         <TitleBox>
-          <h3>{detail.title}</h3>
+          <LikeBox>
+            <h3>{detail.title}</h3>
+            <p>{detail.likeNum}</p>
+            <Heart>❤︎</Heart>
+          </LikeBox>
           <div>
             <Button onClick={() => deleteHandler(id)}>삭제</Button>
             <Button onClick={onToggle}>수정</Button>
@@ -292,4 +299,15 @@ const User = styled.div`
   margin-bottom: 8px;
   color: blue;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Heart = styled.div`
+  font-size: 25px;
+  color: rgb(255, 86, 119); ;
+`;
+
+const LikeBox = styled.div`
+  display: flex;
 `;

@@ -17,7 +17,7 @@ function Home() {
   });
   const navigate = useNavigate();
   const [list, setList] = useState([]);
-
+  console.log(list);
   const [page, setPage] = useState(1);
   const [item, setItems] = useState(5);
   const handlerPageChange = (page) => {
@@ -38,7 +38,7 @@ function Home() {
                   <User>작성자 : {item.username}</User>
                   <ImgBox>
                     <ImgView src={item.imgUrl} alt="img" />
-                    <Count>1</Count>
+                    <Count>{item.likesNum}</Count>
                     <Heart>❤︎</Heart>
                   </ImgBox>
                   <Title
