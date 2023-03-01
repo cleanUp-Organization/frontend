@@ -4,6 +4,7 @@ import { GiBroom } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import "../fonts/font.css";
 
 function Header() {
   const logoStyle = {
@@ -59,4 +60,7 @@ const TitleBox = styled.div`
 `;
 const Logo = styled.h1`
   margin: auto 0px;
+  font-family: "LOTTERIACHAB";
+  font-weight: 100;
+  font-size: 50px;
 `;
