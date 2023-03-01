@@ -1,8 +1,10 @@
 import React from "react";
 import Layout from "../components/Layout";
-import Header from "../components/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { GiBroom } from "react-icons/gi";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function App() {
   let username = document.querySelector("#username");
@@ -76,35 +78,116 @@ export default function App() {
     }
   }
 
+  const logoStyle = {
+    color: "white",
+    width: "60px",
+    height: "60px",
+    margin: "auto 10px",
+  };
+  const userStyle = {
+    color: "lightgray",
+    width: "40px",
+    height: "40px",
+    margin: "auto 0px",
+    cursor: "pointer",
+  };
+
   return (
     <Layout>
-      <Header></Header>
+      <HeaderBox>
+        <div></div>
+        <TitleBox>
+          <GiBroom style={logoStyle} />
+          <Logo>청소 대장</Logo>
+        </TitleBox>
+        <FaUserCircle style={userStyle} onClick={() => navigate("/board")} />
+      </HeaderBox>
+      <LoginBox>
+        <h2>회원가입</h2>
+        <InputBox>
+          <Input
+            type="text"
+            id="username"
+            name="username"
+            onChange={onChange}
+            placeholder="아이디"
+          />
 
-      <h2>회원가입</h2>
+          <Input
+            type="password"
+            id="password"
+            name="password"
+            onChange={onChange}
+            placeholder="비밀번호"
+          />
 
-      <input
-        type="text"
-        id="username"
-        name="username"
-        onChange={onChange}
-        placeholder="아이디"
-      />
-
-      <input
-        type="password"
-        id="password"
-        name="password"
-        onChange={onChange}
-        placeholder="비밀번호"
-      />
-
-      <input
+          {/* <input
         type="button"
         className="button medium primary"
         onClick={letsJoin}
         id="joinBtn"
         value="가입하기"
-      />
+      /> */}
+          <Buttons>
+            <Signup onClick={letsJoin}>가입하기</Signup>
+          </Buttons>
+        </InputBox>
+      </LoginBox>
     </Layout>
   );
 }
+const HeaderBox = styled.div`
+  width: 100%;
+  height: 6rem;
+  background-color: rgb(83, 127, 231);
+  color: white;
+  display: flex;
+  justify-content: space-around;
+`;
+const TitleBox = styled.div`
+  display: flex;
+`;
+const Logo = styled.h1`
+  margin: auto 0px;
+`;
+
+const LoginBox = styled.div`
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 150px;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  margin: 0 auto;
+  margin-top: 10px;
+`;
+
+const Input = styled.input`
+  border: 1px solid #eee;
+  padding: 20px;
+  margin-bottom: 10px;
+  outline: none;
+`;
+
+const Signup = styled.button`
+  border-radius: 5px;
+  background-color: rgb(83, 127, 231);
+  border: none;
+  width: 70px;
+  height: 40px;
+  color: white;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+    color: black;
+  }
+`;

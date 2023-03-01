@@ -16,3 +16,9 @@ ARN: arn:aws:s3:::cleanproject
     }
   ]
 }
+
+aws s3 sync ./build s3://cleanproject --profile=lionloopy
+
+http://cleanproject.s3-website.ap-northeast-2.amazonaws.com
+
+cleanproject.s3.ap-northeast-2.amazonaws.com
