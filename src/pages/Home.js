@@ -6,6 +6,7 @@ import { getBoard } from "../api/clean";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import axios from 'axios';
 
 function Home() {
   const { data } = useQuery("clean", getBoard);
@@ -23,6 +24,15 @@ function Home() {
     setPage(page);
   };
 
+  const accessToken = window.localStorage.getItem(
+    "token"
+  );
+
+  const onClickHeartHandler = (id) => {
+     const res = axios.post(`http://13.209.14.99:8080/api/boards/${id}/like`, {headers:{jwtUtil:`Bearer ${accessToken}`}})
+    console.log(res)
+    };
+
   return (
     <>
       <Layout>
@@ -36,8 +46,10 @@ function Home() {
                 <CleanBox>
                   <ImgBox>
                     <ImgView src={item.imgUrl} alt="img" />
-                    <Count>1</Count>
-                    <Heart>❤︎</Heart>
+                  <Count>1</Count>
+                    <Heart onClick={()=>onClickHeartHandler(item.id)}>
+                      ❤︎
+                    </Heart>
                   </ImgBox>
                   <Title
                     key={item.id}

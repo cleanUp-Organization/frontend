@@ -44,7 +44,7 @@ export default function App() {
         .then((res) => res.json())
         .then((response) => {
           // console.log(response.Authorization);
-          console.log(response.jwtUtil);
+          console.log("response.headers : ",response);
           if (response.statusCode === "OK") {
             // 로그인 성공시
             alert("로그인 성공");
