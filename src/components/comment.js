@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -42,8 +42,6 @@ function Comment() {
     setDetail([...detail, newComment]);
     console.log(detail);
   };
-  //   const Count = target.comments.length;
-  //   console.log(Count);
 
   //댓글 삭제
   const delMutation = useMutation(deleteComment, {
@@ -78,7 +76,6 @@ function Comment() {
           />
           <Button>등록</Button>
         </form>
-        {/* <CounterBox>댓글 {Count}</CounterBox> */}
       </WrapBox>
       <CommentBox>
         {detail.length > 0 &&
@@ -108,24 +105,12 @@ const WrapBox = styled.div`
   width: 800px;
 `;
 
-const Form = styled.form`
-  width: 800px;
-`;
 const CommentInput = styled.input`
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 10px;
-  width: 500px;
-  margin-right: 10px;
-`;
-
-const User = styled.input`
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  padding: 5px;
-  margin-bottom: 10px;
-  width: 200px;
+  width: 720px;
   margin-right: 10px;
 `;
 
@@ -137,13 +122,6 @@ const Button = styled.button`
   height: 35px;
   color: white;
   cursor: pointer;
-`;
-
-const CounterBox = styled.div`
-  color: rgb(83, 127, 231);
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 20px;
 `;
 
 const CommentBox = styled.div`
