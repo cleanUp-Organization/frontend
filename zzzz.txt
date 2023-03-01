@@ -1,0 +1,18 @@
+ARN: arn:aws:s3:::cleanproject
+
+
+{
+  "Id": "Policy1677682030953",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1677682018834",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::cleanproject/*",
+      "Principal": "*"
+    }
+  ]
+}
