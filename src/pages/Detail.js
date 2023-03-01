@@ -107,6 +107,8 @@ function Detail() {
       };
       updateMutation.mutate(payload);
       console.log(payload.imgUrl);
+      console.log(detail.imgUrl);
+      console.log(detail.title);
       setUpdateTitle("");
       setUpdateContent("");
       setDetail(payload);
@@ -114,6 +116,7 @@ function Detail() {
       alert("수정 완료!");
     }
   };
+
   return (
     <>
       <Header />
@@ -137,7 +140,7 @@ function Detail() {
                     />
                     <button onClick={onImgButton}>파일 업로드</button>
                     <div>
-                      <ImgBox src={imgView} alt="img" />;
+                      <ImgBox src={detail.imgUrl} alt="img" />;
                     </div>
                     <input
                       type="file"

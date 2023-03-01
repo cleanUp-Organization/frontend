@@ -22,11 +22,6 @@ function Home() {
   const handlerPageChange = (page) => {
     setPage(page);
   };
-  const itemChange = (event) => {
-    setItems(Number(event.target.value));
-  };
-
-  //페이지네이션
 
   return (
     <>
