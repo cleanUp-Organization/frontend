@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { getBoard } from "../api/clean";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +35,7 @@ function Home() {
             .map((item) => {
               return (
                 <CleanBox>
-                  <p>작성자 : {item.username}</p>
+                  <User>작성자 : {item.username}</User>
                   <ImgBox>
                     <ImgView src={item.imgUrl} alt="img" />
                     <Count>1</Count>
@@ -72,7 +72,7 @@ export default Home;
 
 const Nav = styled.p`
   margin: 0 auto;
-  margin-top: 4.5rem;
+  margin-top: 6rem;
   width: 870px;
 `;
 const Wrap = styled.div`
@@ -168,4 +168,11 @@ const PageBox = styled.div`
   ul.pagination li a.active {
     color: blue;
   }
+`;
+
+const User = styled.div`
+  font-size: 11px;
+  margin-bottom: 8px;
+  color: blue;
+  text-align: left;
 `;

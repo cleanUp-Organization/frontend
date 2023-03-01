@@ -122,6 +122,7 @@ function Detail() {
     <>
       <Header />
       <Wrap>
+        <User>작성자 : {detail.username}</User>
         <TitleBox>
           <h3>{detail.title}</h3>
           <div>
@@ -131,7 +132,7 @@ function Detail() {
               <UpdateWrap>
                 <Background>
                   <UpdateBox>
-                    <form
+                    <UpdateBox
                       onSubmit={updateHandler}
                       encType="multipart/form-data"
                     >
@@ -167,7 +168,7 @@ function Detail() {
                         <UpdateButton>수정하기</UpdateButton>
                         <UpdateButton onClick={onToggle}>취소</UpdateButton>
                       </Buttons>
-                    </form>
+                    </UpdateBox>
                   </UpdateBox>
                 </Background>
               </UpdateWrap>
@@ -189,7 +190,7 @@ export default Detail;
 
 const Wrap = styled.div`
   margin: 0 auto;
-  margin-top: 4rem;
+  margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
   width: 800px;
@@ -224,6 +225,10 @@ const Button = styled.button`
   color: white;
   margin-right: 5px;
   cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+    color: black;
+  }
 `;
 
 const UpdateWrap = styled.div`
@@ -243,7 +248,7 @@ const Background = styled.div`
   z-index: 999;
 `;
 
-const UpdateBox = styled.div`
+const UpdateBox = styled.form`
   position: absolute;
   width: 800px;
   gap: 10px;
@@ -272,8 +277,19 @@ const UpdateButton = styled.button`
   color: white;
   margin-right: 5px;
   cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+    color: black;
+  }
 `;
 
 const Buttons = styled.div`
   display: flex;
+`;
+
+const User = styled.div`
+  font-size: 11px;
+  margin-bottom: 8px;
+  color: blue;
+  text-align: left;
 `;
