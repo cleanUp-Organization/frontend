@@ -8,18 +8,18 @@ import { FaCommentDots } from "react-icons/fa";
 
 function Comment() {
   const { id } = useParams();
-  const { data } = useQuery("clean", getBoard);
 
   //댓글 조회
   const [detail, setDetail] = useState({});
-
-  useEffect(() => {
-    const detailBoard = async () => {
-      const { data } = await instance.get(`/api/boards/${id}`);
-      return data.commentList;
-    };
-    detailBoard().then((result) => setDetail(result));
-  }, [id]);
+  const getComment = async () => {
+    const data = await instance.get(`/api/boards/${id}`);
+    return data;
+  };
+  const { data } = useQuery("clean", getComment, {
+    onSuccess: (response) => {
+      setDetail(response.data.commentList.reverse());
+    },
+  });
   // const [nickname, setNickname] = useState("");
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
@@ -33,7 +33,6 @@ function Comment() {
     event.preventDefault();
     const newComment = {
       id: id,
-      // username: detail.map((item) => item.username),
       contents: comment,
     };
     mutation.mutate(newComment);

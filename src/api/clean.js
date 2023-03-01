@@ -63,7 +63,11 @@ const addBoard = async (formData) => {
 
 const deleteBoard = async (id) => {
   await baseURL
-    .delete(`/api/boards/${id}`, config)
+    .delete(`/api/boards/${id}`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    })
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);
