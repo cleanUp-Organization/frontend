@@ -11,7 +11,7 @@ import { instance } from "../api/axios";
 function Detail() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [detail, setDetail] = useState({});
+  const [detail, setDetail] = useState("");
 
   //삭제
   const queryClient = useQueryClient();
@@ -96,9 +96,9 @@ function Detail() {
       return;
     } else {
       const formData = new FormData();
-      formData.set("title", updateTitle);
-      formData.set("content", updateContent);
-      formData.set("imgUrl", file);
+      formData.append("title", updateTitle);
+      formData.append("content", updateContent);
+      formData.append("imgUrl", file);
       const payload = {
         id: id,
         title: formData.get("title"),
@@ -130,40 +130,43 @@ function Detail() {
               <UpdateWrap>
                 <Background>
                   <UpdateBox>
-                    <TitleInput
-                      type="text"
-                      placeholder={detail.title}
-                      value={updateTitle || ""}
-                      onChange={(event) => {
-                        setUpdateTitle(event.target.value);
-                      }}
-                    />
-                    <button onClick={onImgButton}>파일 업로드</button>
-                    <div>
-                      <ImgBox src={detail.imgUrl} alt="img" />;
-                    </div>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      name="fileUpload"
-                      style={{ display: "none" }}
-                      ref={fileInput}
-                      onChange={onImgHandler}
-                    />
-                    <ContentInput
-                      type="text"
-                      placeholder={detail.content}
-                      value={updateContent || ""}
-                      onChange={(event) => {
-                        setUpdateContent(event.target.value);
-                      }}
-                    />
-                    <Buttons>
-                      <UpdateButton onClick={updateHandler}>
-                        수정하기
-                      </UpdateButton>
-                      <UpdateButton onClick={onToggle}>취소</UpdateButton>
-                    </Buttons>
+                    <form
+                      onSubmit={updateHandler}
+                      encType="multipart/form-data"
+                    >
+                      <TitleInput
+                        type="text"
+                        placeholder={detail.title}
+                        value={updateTitle || ""}
+                        onChange={(event) => {
+                          setUpdateTitle(event.target.value);
+                        }}
+                      />
+                      <button onClick={onImgButton}>파일 업로드</button>
+                      <div>
+                        <ImgBox src={detail.imgUrl} alt="img" />;
+                      </div>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        name="fileUpload"
+                        style={{ display: "none" }}
+                        ref={fileInput}
+                        onChange={onImgHandler}
+                      />
+                      <ContentInput
+                        type="text"
+                        placeholder={detail.content}
+                        value={updateContent || ""}
+                        onChange={(event) => {
+                          setUpdateContent(event.target.value);
+                        }}
+                      />
+                      <Buttons>
+                        <UpdateButton>수정하기</UpdateButton>
+                        <UpdateButton onClick={onToggle}>취소</UpdateButton>
+                      </Buttons>
+                    </form>
                   </UpdateBox>
                 </Background>
               </UpdateWrap>

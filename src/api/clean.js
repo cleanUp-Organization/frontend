@@ -28,11 +28,12 @@ const getBoard = async () => {
 // };
 
 const addBoard = async (formData) => {
+  console.log(formData);
   await baseURL
     .post("/api/boards", formData, {
       headers: {
         Authorization: `Bearer ${access_token}`,
-        "Contest-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
       },
     })
     .then((response) => {
@@ -101,14 +102,14 @@ const updateBoard = async (payload) => {
       `/api/boards/${payload.id}`,
       {
         title: payload.title,
-        images: payload.imgUrl,
+        imgUrl: payload.imgUrl,
         content: payload.content,
       },
 
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
-          "Contest-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
         },
       }
     )
