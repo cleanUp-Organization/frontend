@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Board from "../pages/Board";
 import Detail from "../pages/Detail";
 import SignUp from "../pages/SignUp";
+import SignOut from "../pages/SignOut";
 
 const Router = () => {
   return (
@@ -11,6 +12,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/signout" element={<SignOut />} />
         <Route path="/main" element={<Home />} />
         <Route path="/board" element={<Board />} />
         <Route path="/main/:id" element={<Detail />} />
