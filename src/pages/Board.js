@@ -69,7 +69,11 @@ function Board() {
     <>
       <Header />
       <FormBox onSubmit={onSubmitHandler}>
-        <button onClick={onImgButton}>파일 업로드</button>
+
+        <Upbutton onClick={onImgButton}>
+        📷
+        </Upbutton>
+
         <div>
           {imgView.map((item) => {
             return <ImgBox src={item} alt="img" />;
@@ -86,7 +90,7 @@ function Board() {
         <TitleInput
           type="text"
           name="title"
-          placeholder="제목을 입력해주세요(20자 내외)"
+          placeholder="제목을 입력해주세요 (20자 내외)"
           value={title}
           onChange={(event) => {
             setTitle(event.target.value);
@@ -96,7 +100,7 @@ function Board() {
         <ContentInput
           type="text"
           name="title"
-          placeholder="내용을 입력해주세요(100자 내외)"
+          placeholder="내용을 입력해주세요 (100자 내외)"
           value={content}
           onChange={(event) => {
             setContent(event.target.value);
@@ -122,16 +126,24 @@ const FormBox = styled.form`
 `;
 
 const TitleInput = styled.input`
+  box-sizing: border-box;
   border-radius: 5px;
-  padding: 20px;
   border: 1px solid lightgray;
+  width: 800px;
+  height: 50px;
+  color: black;
+  padding-left: 15px;
 `;
 
 const ContentInput = styled.textarea`
+  box-sizing: border-box;
   border-radius: 5px;
-  padding: 20px;
   border: 1px solid lightgray;
+  width: 800px;
   height: 200px;
+  color: black;
+  padding-top: 15px;
+  padding-left: 15px;
 `;
 
 const Button = styled.button`
@@ -140,12 +152,32 @@ const Button = styled.button`
   border: none;
   width: 100px;
   height: 50px;
-  margin: 0px 0px 0px auto;
+  margin: 0px 0px 100px auto;
   color: white;
   cursor: pointer;
+  &:hover {
+    background-color: #0064FF;
+    color: white;
+  }
 `;
 
+const Upbutton = styled.button`
+  border-radius: 5px;
+  background-color: #d2d2d2;
+  border: none;
+  width: 60px;
+  height: 50px;
+  margin: 0px 0px 0px 0px;
+  color: white;
+  font-size: 150%;
+  cursor: pointer;
+  &:hover {
+    background-color: #b4b4b4;
+    color: white;
+  }
+`;
+  
 const ImgBox = styled.img`
-  width: 800px;
-  height: 200px;
+  width: 100%;
+  border-radius: 5px;
 `;

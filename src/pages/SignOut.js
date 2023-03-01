@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import Axios from "axios";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 function SignOut() {
@@ -32,18 +33,44 @@ function SignOut() {
   };
   return (
     <Layout>
+      
       <Header></Header>
-      <h2>회원 탈퇴</h2>
+      <SignoutBox>
+      <h2>회원탈퇴</h2>
+          <Buttons>
+            <Signout onClick={letsSignout}>탈퇴하기</Signout>
+          </Buttons>
+      </SignoutBox>
 
-      <input
-        type="button"
-        className="button medium primary"
-        onClick={letsSignout}
-        id="signoutBtn"
-        value="탈퇴하기"
-      />
     </Layout>
   );
 }
 
 export default SignOut;
+
+const SignoutBox = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 100px; 
+`;
+
+
+const Buttons = styled.div`
+  margin: 0 auto;
+  margin-top: 30px; 
+`;
+
+const Signout = styled.button`
+  border-radius: 5px;
+  background-color: black;
+  border: none;
+  width: 70px;
+  height: 40px;
+  color: white;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: red;
+    color: white;
+  }
+`;

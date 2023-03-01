@@ -129,12 +129,14 @@ function Detail() {
         <TitleBox>
           <LikeBox>
             <h3>{detail.title}</h3>
-            <p>{detail.likeNum}</p>
+            <NumberOfLikes>{detail.likeNum}</NumberOfLikes>
             <Heart>❤︎</Heart>
           </LikeBox>
           <div>
-            <Button onClick={() => deleteHandler(id)}>삭제</Button>
-            <Button onClick={onToggle}>수정</Button>
+
+              <EditButton onClick={onToggle}>수정</EditButton>
+              <DeleteButton onClick={() => deleteHandler(id)}>삭제</DeleteButton>
+
             {open && (
               <UpdateWrap>
                 <Background>
@@ -151,7 +153,9 @@ function Detail() {
                           setUpdateTitle(event.target.value);
                         }}
                       />
-                      <button onClick={onImgButton}>파일 업로드</button>
+                      <Upbutton onClick={onImgButton}>
+                      📷
+                      </Upbutton>
                       <div>
                         <ImgBox src={imgView} alt="img" />
                       </div>
@@ -223,7 +227,7 @@ const Line = styled.div`
   background-color: lightgray;
 `;
 
-const Button = styled.button`
+const EditButton = styled.button`
   border-radius: 5px;
   background-color: rgb(83, 127, 231);
   border: none;
@@ -235,6 +239,22 @@ const Button = styled.button`
   &:hover {
     background-color: lightgray;
     color: black;
+  }
+`;
+
+const DeleteButton = styled.button`
+  border-radius: 5px;
+  background-color: black;
+  border: none;
+  width: 55px;
+  height: 35px;
+  color: white;
+  margin-right: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+  &:hover {
+    background-color: red;
+    color: white;
   }
 `;
 
@@ -300,14 +320,50 @@ const User = styled.div`
   color: blue;
   text-align: left;
   display: flex;
-  justify-content: space-between;
+  gap: 500px;
+`;
+
+{/* <LikeBox>
+  <h3>{detail.title}</h3>
+  <NumberOfLikes>{detail.likeNum}</NumberOfLikes>
+  <Heart>❤︎</Heart>
+</LikeBox> */}
+
+const LikeBox = styled.div`
+  display: flex;
+`;
+
+const NumberOfLikes = styled.div`
+  display: flex;
+  font-size: 20px;
+  margin: auto;
+  margin-left: 50px;
+  margin-right: 10px;
 `;
 
 const Heart = styled.div`
   font-size: 25px;
-  color: rgb(255, 86, 119); ;
+  color: black;
+  margin: auto;
+  cursor: pointer;
+  &:hover {
+    color: rgb(255, 86, 119); 
+  }
+  
 `;
 
-const LikeBox = styled.div`
-  display: flex;
+const Upbutton = styled.button`
+  border-radius: 5px;
+  background-color: #d2d2d2;
+  border: none;
+  width: 60px;
+  height: 50px;
+  margin: 0px 0px 0px 0px;
+  color: white;
+  font-size: 150%;
+  cursor: pointer;
+  &:hover {
+    background-color: #b4b4b4;
+    color: white;
+  }
 `;
