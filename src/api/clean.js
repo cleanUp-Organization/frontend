@@ -94,17 +94,21 @@ const deleteBoard = async (id) => {
 //     });
 // };
 
-const updateBoard = async (formData) => {
-  console.log(formData);
+const updateBoard = async (payload) => {
   await baseURL
     .put(
-      `/api/boards/${formData.id}`,
+      `/api/boards/${payload.id}`,
       {
-        title: formData.title,
-        imgUrl: formData.imgUrl,
-        content: formData.content,
+        title: payload.title,
+        images: payload.imgUrl,
+        content: payload.content,
       },
-      config
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Contest-Type": "multipart/form-data",
+        },
+      }
     )
     .then((response) => {
       if (response.statusCode === "OK") {

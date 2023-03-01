@@ -58,11 +58,6 @@ function Home() {
         </Wrap>
 
         <PageBox>
-          {/* <Arrow> ◀ </Arrow>
-          <Page>1</Page>
-          <Page>2</Page>
-          <Page>3</Page>
-          <Arrow> ▶</Arrow> */}
           <Pagination
             activePage={page}
             itemsCountPerPage={item}
@@ -176,22 +171,4 @@ const PageBox = styled.div`
   ul.pagination li a.active {
     color: blue;
   }
-`;
-
-const Arrow = styled.button`
-  border: none;
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: rgb(83, 127, 231);
-    color: white;
-  }
-`;
-
-const Page = styled.div`
-  cursor: pointer;
-  font-size: 15px;
-  margin: auto 0;
 `;

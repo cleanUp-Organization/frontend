@@ -76,6 +76,7 @@ function Detail() {
     setImgView([]);
     for (let i = 0; i < event.target.files.length; i++) {
       if (event.target.files[i]) {
+        setFile(event.target.files[i]);
         let reader = new FileReader();
         reader.readAsDataURL(event.target.files[i]);
         reader.onloadend = () => {
@@ -95,13 +96,20 @@ function Detail() {
       return;
     } else {
       const formData = new FormData();
-      formData.append("title", updateTitle);
-      formData.append("content", updateContent);
-      formData.append("imgUrl", file);
-      updateMutation.mutate(formData);
+      formData.set("title", updateTitle);
+      formData.set("content", updateContent);
+      formData.set("imgUrl", file);
+      const payload = {
+        id: id,
+        title: formData.get("title"),
+        content: formData.get("content"),
+        imgUrl: formData.get("imgUrl"),
+      };
+      updateMutation.mutate(payload);
+      console.log(payload);
       setUpdateTitle("");
       setUpdateContent("");
-      setDetail(formData);
+      setDetail(payload);
       onToggle();
       alert("수정 완료!");
     }
@@ -129,13 +137,12 @@ function Detail() {
                     />
                     <button onClick={onImgButton}>파일 업로드</button>
                     <div>
-                      <ImgBox src={file} alt="img" />;
+                      <ImgBox src={imgView} alt="img" />;
                     </div>
                     <input
                       type="file"
                       accept="image/*"
                       name="fileUpload"
-                      // value={updateImg || ""}
                       style={{ display: "none" }}
                       ref={fileInput}
                       onChange={onImgHandler}

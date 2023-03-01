@@ -56,7 +56,6 @@ function Board() {
         reader.readAsDataURL(event.target.files[i]);
         reader.onloadend = () => {
           const base = reader.result;
-          console.log(base);
           if (base) {
             const baseSub = base.toString();
             setImgView((imgView) => [...imgView, baseSub]);
