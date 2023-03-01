@@ -1,0 +1,24 @@
+ARN: arn:aws:s3:::cleanproject
+
+
+{
+  "Id": "Policy1677682030953",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1677682018834",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::cleanproject/*",
+      "Principal": "*"
+    }
+  ]
+}
+
+aws s3 sync ./build s3://cleanproject --profile=lionloopy
+
+http://cleanproject.s3-website.ap-northeast-2.amazonaws.com
+
+cleanproject.s3.ap-northeast-2.amazonaws.com

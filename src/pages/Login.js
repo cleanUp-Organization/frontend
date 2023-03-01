@@ -1,9 +1,11 @@
 import React from "react";
 import Layout from "../components/Layout";
-import Header from "../components/Header";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { GiBroom } from "react-icons/gi";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function App() {
   let username = document.querySelector("#username");
@@ -66,37 +68,132 @@ export default function App() {
         });
     }
   }
+  const logoStyle = {
+    color: "white",
+    width: "60px",
+    height: "60px",
+    margin: "auto 10px",
+  };
+  const userStyle = {
+    color: "lightgray",
+    width: "40px",
+    height: "40px",
+    margin: "auto 0px",
+    cursor: "pointer",
+  };
 
   return (
     <Layout>
-      <Header></Header>
+      <HeaderBox>
+        <div></div>
+        <TitleBox>
+          <GiBroom style={logoStyle} />
+          <Logo>청소 대장</Logo>
+        </TitleBox>
+        <FaUserCircle style={userStyle} onClick={() => navigate("/board")} />
+      </HeaderBox>
+      <LoginBox>
+        <h2>로그인</h2>
+        <InputBox>
+          <Input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="아이디"
+            onChange={onChange}
+          />
 
-      <h2>로그인</h2>
-
-      <input
-        type="text"
-        id="username"
-        name="username"
-        placeholder="아이디"
-        onChange={onChange}
-      />
-
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="비밀번호"
-        onChange={onChange}
-      />
-
-      <input
-        type="button"
-        className="button medium secondary"
-        onClick={letsLogin}
-        id="loginBtn"
-        value="로그인"
-      />
-      <button onClick={() => navigate("/signup")}>회원가입</button>
+          <Input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="비밀번호"
+            onChange={onChange}
+          />
+          <Buttons>
+            <Login onClick={letsLogin}>로그인</Login>
+            {/* <input
+              type="button"
+              className="button medium secondary"
+              onClick={letsLogin}
+              id="loginBtn"
+              value="로그인"
+            /> */}
+            <Signup onClick={() => navigate("/signup")}>회원가입</Signup>
+          </Buttons>
+        </InputBox>
+      </LoginBox>
     </Layout>
   );
 }
+
+const HeaderBox = styled.div`
+  width: 100%;
+  height: 6rem;
+  background-color: rgb(83, 127, 231);
+  color: white;
+  display: flex;
+  justify-content: space-around;
+`;
+const TitleBox = styled.div`
+  display: flex;
+`;
+const Logo = styled.h1`
+  margin: auto 0px;
+`;
+
+const LoginBox = styled.div`
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 150px;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  margin: 0 auto;
+  margin-top: 10px;
+`;
+
+const Input = styled.input`
+  border: 1px solid #eee;
+  padding: 20px;
+  margin-bottom: 10px;
+  outline: none;
+`;
+
+const Login = styled.button`
+  border-radius: 5px;
+  background-color: rgb(83, 127, 231);
+  border: none;
+  width: 60px;
+  height: 40px;
+  color: white;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+    color: black;
+  }
+`;
+
+const Signup = styled.button`
+  border-radius: 5px;
+  background-color: rgb(83, 127, 231);
+  border: none;
+  width: 70px;
+  height: 40px;
+  color: white;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+    color: black;
+  }
+`;
