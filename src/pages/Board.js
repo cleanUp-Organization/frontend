@@ -17,9 +17,11 @@ function Board() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imgView, setImgView] = useState([
-    "https://mblogthumb-phinf.pstatic.net/MjAxODAzMDNfMjU4/MDAxNTIwMDQxODA4Mjc0.gR3L5xx3IbpACbvRRF9j9xjJmO-EPAY35oF1AdBnDcog.WZyeqFi6cMmH-v-R-ec44Ny6ZgVyAJIYMT78p4Rxbkwg.PNG.osy2201/2_%2850%ED%8D%BC%EC%84%BC%ED%8A%B8_%ED%9A%8C%EC%83%89%29_%ED%9A%8C%EC%83%89_%EB%8B%A8%EC%83%89_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_180303.png?type=w800",
+    "https://cleaningproject.s3.ap-northeast-2.amazonaws.com/static/%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8%20%EC%B2%AD%EC%86%8C.png",
   ]);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(
+    "https://cleaningproject.s3.ap-northeast-2.amazonaws.com/static/%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8%20%EC%B2%AD%EC%86%8C.png"
+  );
   const navigate = useNavigate();
 
   // 데이터 등록 #1
@@ -54,7 +56,6 @@ function Board() {
         reader.readAsDataURL(event.target.files[i]);
         reader.onloadend = () => {
           const base = reader.result;
-          console.log(base);
           if (base) {
             const baseSub = base.toString();
             setImgView((imgView) => [...imgView, baseSub]);

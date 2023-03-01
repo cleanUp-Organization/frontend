@@ -28,11 +28,12 @@ const getBoard = async () => {
 // };
 
 const addBoard = async (formData) => {
+  console.log(formData);
   await baseURL
     .post("/api/boards", formData, {
       headers: {
         Authorization: `Bearer ${access_token}`,
-        "Contest-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
       },
     })
     .then((response) => {
@@ -94,13 +95,24 @@ const deleteBoard = async (id) => {
 //     });
 // };
 
-const updateBoard = async (formData) => {
+const updateBoard = async (payload) => {
+  console.log(payload);
   await baseURL
-    .put(`/api/boards/${formData.id}`, {
-      title: formData.title,
-      imgUrl: formData.imgUrl,
-      content: formData.content,
-    })
+    .patch(
+      `/api/boards/${payload.id}`,
+      {
+        title: payload.title,
+        imgUrl: payload.imgUrl,
+        content: payload.content,
+      },
+
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);

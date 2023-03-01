@@ -11,7 +11,7 @@ import { instance } from "../api/axios";
 function Detail() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [detail, setDetail] = useState({});
+  const [detail, setDetail] = useState("");
 
   //삭제
   const queryClient = useQueryClient();
@@ -32,7 +32,6 @@ function Detail() {
   useEffect(() => {
     const detailBoard = async () => {
       const { data } = await instance.get(`/api/boards/${id}`);
-      console.log(data.commentList);
       return data;
     };
     detailBoard().then((result) => setDetail(result));
@@ -62,6 +61,7 @@ function Detail() {
   const onToggle = () => {
     setOpen(!open);
     setImgView(detail.imgUrl);
+    setFile(detail.file);
     setUpdateTitle(detail.title);
     setUpdateContent(detail.content);
   };
@@ -77,6 +77,7 @@ function Detail() {
     setImgView([]);
     for (let i = 0; i < event.target.files.length; i++) {
       if (event.target.files[i]) {
+        setFile(event.target.files[i]);
         let reader = new FileReader();
         reader.readAsDataURL(event.target.files[i]);
         reader.onloadend = () => {
@@ -99,14 +100,23 @@ function Detail() {
       formData.append("title", updateTitle);
       formData.append("content", updateContent);
       formData.append("imgUrl", file);
-      updateMutation.mutate(formData);
+      const payload = {
+        id: id,
+        title: formData.get("title"),
+        content: formData.get("content"),
+        imgUrl: formData.get("imgUrl"),
+      };
+      updateMutation.mutate(payload);
       setUpdateTitle("");
       setUpdateContent("");
-      setDetail(formData);
+      setImgView("");
+      setFile("");
+      setDetail(payload);
       onToggle();
       alert("수정 완료!");
     }
   };
+
   return (
     <>
       <Header />
@@ -120,43 +130,43 @@ function Detail() {
               <UpdateWrap>
                 <Background>
                   <UpdateBox>
-                    <TitleInput
-                      type="text"
-                      placeholder={detail.title}
-                      value={updateTitle || ""}
-                      onChange={(event) => {
-                        setUpdateTitle(event.target.value);
-                      }}
-                    />
-                    <button onClick={onImgButton}>파일 업로드</button>
-                    {/* <div>
-                      {imgView?.map((item) => {
-                        return <ImgBox src={item} alt="img" />;
-                      })}
-                    </div> */}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      name="fileUpload"
-                      // value={updateImg || ""}
-                      style={{ display: "none" }}
-                      ref={fileInput}
-                      onChange={onImgHandler}
-                    />
-                    <ContentInput
-                      type="text"
-                      placeholder={detail.content}
-                      value={updateContent || ""}
-                      onChange={(event) => {
-                        setUpdateContent(event.target.value);
-                      }}
-                    />
-                    <Buttons>
-                      <UpdateButton onClick={updateHandler}>
-                        수정하기
-                      </UpdateButton>
-                      <UpdateButton onClick={onToggle}>취소</UpdateButton>
-                    </Buttons>
+                    <form
+                      onSubmit={updateHandler}
+                      encType="multipart/form-data"
+                    >
+                      <TitleInput
+                        type="text"
+                        placeholder={detail.title}
+                        value={updateTitle || ""}
+                        onChange={(event) => {
+                          setUpdateTitle(event.target.value);
+                        }}
+                      />
+                      <button onClick={onImgButton}>파일 업로드</button>
+                      <div>
+                        <ImgBox src={detail.imgUrl} alt="img" />;
+                      </div>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        name="fileUpload"
+                        style={{ display: "none" }}
+                        ref={fileInput}
+                        onChange={onImgHandler}
+                      />
+                      <ContentInput
+                        type="text"
+                        placeholder={detail.content}
+                        value={updateContent || ""}
+                        onChange={(event) => {
+                          setUpdateContent(event.target.value);
+                        }}
+                      />
+                      <Buttons>
+                        <UpdateButton>수정하기</UpdateButton>
+                        <UpdateButton onClick={onToggle}>취소</UpdateButton>
+                      </Buttons>
+                    </form>
                   </UpdateBox>
                 </Background>
               </UpdateWrap>
