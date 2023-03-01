@@ -8,19 +8,19 @@ import { FaCommentDots } from "react-icons/fa";
 
 function Comment() {
   const { id } = useParams();
-  const { data } = useQuery("clean", getBoard);
-  // const target = data?.filter((item) => item.id === id)[0].commentList;
 
   //댓글 조회
   const [detail, setDetail] = useState({});
-  useEffect(() => {
-    const detailBoard = async () => {
-      const { data } = await instance.get(`/api/boards/${id}`);
-      return data.commentList;
-    };
-    detailBoard().then((result) => setDetail(result));
-  }, [id]);
-  const [nickname, setNickname] = useState("");
+  const getComment = async () => {
+    const data = await instance.get(`/api/boards/${id}`);
+    return data;
+  };
+  const { data } = useQuery("clean", getComment, {
+    onSuccess: (response) => {
+      setDetail(response.data.commentList.reverse());
+    },
+  });
+  // const [nickname, setNickname] = useState("");
   const [comment, setComment] = useState("");
   const queryClient = useQueryClient();
 
@@ -28,17 +28,19 @@ function Comment() {
   const mutation = useMutation(addComment, {
     onSuccess: () => queryClient.invalidateQueries("clean"),
   });
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     const newComment = {
       id: id,
       contents: comment,
-      username: nickname,
     };
     mutation.mutate(newComment);
     alert("댓글 등록 완료!");
-    setNickname("");
+    // setNickname("");
     setComment("");
+    setDetail([...detail, newComment]);
+    console.log(detail);
   };
   //   const Count = target.comments.length;
   //   console.log(Count);
@@ -51,10 +53,9 @@ function Comment() {
   });
   const commentDeleteHandler = (id) => {
     const message = window.confirm("댓글을 삭제하시겠습니까?");
-    console.log(id);
     if (message) {
       delMutation.mutate(id);
-      console.log(id);
+      setDetail([...detail]);
     } else {
       return;
     }
@@ -67,14 +68,6 @@ function Comment() {
     <div>
       <WrapBox>
         <form onSubmit={onSubmitHandler}>
-          <User
-            type="text"
-            placeholder="이름"
-            value={nickname}
-            onChange={(event) => {
-              setNickname(event.target.value);
-            }}
-          />
           <CommentInput
             type="text"
             placeholder="댓글"

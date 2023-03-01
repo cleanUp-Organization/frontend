@@ -28,7 +28,6 @@ const getBoard = async () => {
 // };
 
 const addBoard = async (formData) => {
-  console.log(formData);
   await baseURL
     .post("/api/boards", formData, {
       headers: {
@@ -64,7 +63,11 @@ const addBoard = async (formData) => {
 
 const deleteBoard = async (id) => {
   await baseURL
-    .delete(`/api/boards/${id}`, config)
+    .delete(`/api/boards/${id}`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    })
     .then((response) => {
       if (response.statusCode === "OK") {
         alert(response.msg);
@@ -96,7 +99,6 @@ const deleteBoard = async (id) => {
 // };
 
 const updateBoard = async (payload) => {
-  console.log(payload);
   await baseURL
     .patch(
       `/api/boards/${payload.id}`,
@@ -146,11 +148,13 @@ const addComment = async (id) => {
     .post(
       `/api/boards/${id.id}/comments`,
       {
+        username: id.username,
         contents: id.contents,
       },
       config
     )
     .then((response) => {
+      console.log(response);
       if (response.statusCode === "OK") {
         alert(response.msg);
       }
@@ -163,7 +167,6 @@ const addComment = async (id) => {
 };
 
 const deleteComment = async (id) => {
-  console.log(id);
   await baseURL
     .delete(`/api/boards/comments/${id}`, config)
     .then((response) => {

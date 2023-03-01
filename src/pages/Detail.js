@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 import Header from "../components/Header";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteBoard, updateBoard } from "../api/clean";
@@ -90,6 +89,7 @@ function Detail() {
       }
     }
   };
+
   const updateHandler = (event) => {
     event.preventDefault();
     const message = window.confirm("기록을 수정하시겠습니까?");
@@ -107,9 +107,10 @@ function Detail() {
         imgUrl: formData.get("imgUrl"),
       };
       updateMutation.mutate(payload);
+      navigate("/main");
       setUpdateTitle("");
       setUpdateContent("");
-      setImgView("");
+      setImgView(imgView);
       setFile("");
       setDetail(payload);
       onToggle();
@@ -144,7 +145,7 @@ function Detail() {
                       />
                       <button onClick={onImgButton}>파일 업로드</button>
                       <div>
-                        <ImgBox src={detail.imgUrl} alt="img" />;
+                        <ImgBox src={imgView} alt="img" />
                       </div>
                       <input
                         type="file"
@@ -200,7 +201,7 @@ const TitleBox = styled.div`
   justify-content: space-between;
 `;
 
-const ImgBox = styled.div`
+const ImgBox = styled.img`
   width: 800px;
   height: 300px;
   background-color: lightgray;
