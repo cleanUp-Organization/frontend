@@ -61,6 +61,7 @@ function Detail() {
   const onToggle = () => {
     setOpen(!open);
     setImgView(detail.imgUrl);
+    setFile(detail.file);
     setUpdateTitle(detail.title);
     setUpdateContent(detail.content);
   };
@@ -106,11 +107,10 @@ function Detail() {
         imgUrl: formData.get("imgUrl"),
       };
       updateMutation.mutate(payload);
-      console.log(payload.imgUrl);
-      console.log(detail.imgUrl);
-      console.log(detail.title);
       setUpdateTitle("");
       setUpdateContent("");
+      setImgView("");
+      setFile("");
       setDetail(payload);
       onToggle();
       alert("수정 완료!");
