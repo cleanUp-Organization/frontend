@@ -20,16 +20,15 @@ function Board() {
   const [imgView, setImgView] = useState([
     "https://cleaningproject.s3.ap-northeast-2.amazonaws.com/static/%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8%20%EC%B2%AD%EC%86%8C.png",
   ]);
-  const [file, setFile] = useState(
-    "https://cleaningproject.s3.ap-northeast-2.amazonaws.com/static/%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8%20%EC%B2%AD%EC%86%8C.png"
-  );
+  const [file, setFile] = useState();
+  // "https://cleaningproject.s3.ap-northeast-2.amazonaws.com/static/%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8%20%EC%B2%AD%EC%86%8C.png"
   const navigate = useNavigate();
 
   // 데이터 등록 #1
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (title.trim() === "" || content.trim() === "")
-      return alert("빈칸을 채워주세요!");
+    if (title.trim() === "" || content.trim() === "" || !file)
+      return alert("📷 사진과 글을 입력해주세요!");
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);

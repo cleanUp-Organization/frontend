@@ -39,7 +39,7 @@ function Detail() {
 
   //삭제
   const deleteHandler = (id) => {
-    const message = window.confirm("기록을 삭제하시겠습니까?");
+    const message = window.confirm("❗ 기록을 삭제하시겠습니까?");
     console.log(id);
     if (message) {
       mutation.mutate(id);
@@ -93,7 +93,7 @@ function Detail() {
 
   const updateHandler = (event) => {
     event.preventDefault();
-    const message = window.confirm("기록을 수정하시겠습니까?");
+    const message = window.confirm("❗ 기록을 수정하시겠습니까?");
     if (!message) {
       return;
     } else {
@@ -144,6 +144,7 @@ function Detail() {
         }
       });
     setLikeNum(likeNum);
+    navigate("/main");
   };
 
   return (

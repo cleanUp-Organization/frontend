@@ -50,7 +50,7 @@ function Comment() {
     },
   });
   const commentDeleteHandler = (id) => {
-    const message = window.confirm("댓글을 삭제하시겠습니까?");
+    const message = window.confirm("❗ 댓글을 삭제하시겠습니까?");
     if (message) {
       delMutation.mutate(id);
       setDetail([...detail]);
@@ -126,31 +126,10 @@ const Button = styled.button`
   margin-top: 10px;
   cursor: pointer;
   &:hover {
-    background-color: #0064FF;
+    background-color: #0064ff;
     color: white;
   }
 `;
-
-
-//---------------------------------------------------
-      // <CommentBox>
-      //   {detail.length > 0 &&
-      //     detail.map((item) => {
-      //       return (
-      //         <CommentBox key={item.id}>
-      //           <FaCommentDots style={style} />
-      //           <UserComments>
-      //             <NameBox>{item.username}</NameBox>
-      //             <div>{item.contents}</div>
-      //           </UserComments>
-      //           <DButton onClick={() => commentDeleteHandler(item.id)}>
-      //             삭제
-      //           </DButton>
-      //         </CommentBox>
-      //       );
-      //     })}
-      // </CommentBox>
-//---------------------------------------------------
 
 const DButton = styled.button`
   border-radius: 5px;
@@ -178,14 +157,13 @@ const NewCommentBox = styled.div`
   gap: 10px;
   position: relative;
   margin-bottom: 100px;
-
 `;
 
 const CommentBox = styled.div`
-border-top: solid 1px lightgray;
-border-bottom: solid 1px lightgray;
-padding-top: 20px;
-padding-bottom: 10px;
+  border-top: solid 1px lightgray;
+  border-bottom: solid 1px lightgray;
+  padding-top: 20px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: row;
   margin-top: 5px;
@@ -207,4 +185,3 @@ const NameBox = styled.div`
   font-size: 20px;
   font-weight: 600;
 `;
-
