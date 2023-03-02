@@ -160,17 +160,17 @@ function Detail() {
             <Heart onClick={onLikeHandler}>❤︎</Heart>
           </LikeBox>
           <div>
-            <EditButton onClick={onToggle}>수정</EditButton>
-            <DeleteButton onClick={() => deleteHandler(id)}>삭제</DeleteButton>
-
+            <Button onClick={() => deleteHandler(id)}>삭제</Button>
+            <Button onClick={onToggle}>수정</Button>
             {open && (
               <UpdateWrap>
                 <Background>
                   <UpdateBox>
-                    <UpdateBox
+                    <UpdateForm
                       onSubmit={updateHandler}
                       encType="multipart/form-data"
                     >
+                      <Upbutton onClick={onImgButton}>📷</Upbutton>
                       <TitleInput
                         type="text"
                         placeholder={detail.title}
@@ -179,7 +179,7 @@ function Detail() {
                           setUpdateTitle(event.target.value);
                         }}
                       />
-                      <Upbutton onClick={onImgButton}>📷</Upbutton>
+
                       <div>
                         <ImgBox src={imgView} alt="img" />
                       </div>
@@ -203,7 +203,7 @@ function Detail() {
                         <UpdateButton>수정하기</UpdateButton>
                         <UpdateButton onClick={onToggle}>취소</UpdateButton>
                       </Buttons>
-                    </UpdateBox>
+                    </UpdateForm>
                   </UpdateBox>
                 </Background>
               </UpdateWrap>
@@ -225,7 +225,7 @@ export default Detail;
 
 const Wrap = styled.div`
   margin: 0 auto;
-  margin-top: 2.5rem;
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   width: 800px;
@@ -251,7 +251,7 @@ const Line = styled.div`
   background-color: lightgray;
 `;
 
-const EditButton = styled.button`
+const Button = styled.button`
   border-radius: 5px;
   background-color: rgb(83, 127, 231);
   border: none;
@@ -260,26 +260,6 @@ const EditButton = styled.button`
   color: white;
   margin-right: 5px;
   cursor: pointer;
-  &:hover {
-    background-color: lightgray;
-    color: black;
-  }
-`;
-
-const DeleteButton = styled.button`
-  border-radius: 5px;
-  background-color: black;
-  border: none;
-  width: 55px;
-  height: 35px;
-  color: white;
-  margin-right: 5px;
-  margin-top: 15px;
-  cursor: pointer;
-  &:hover {
-    background-color: red;
-    color: white;
-  }
 `;
 
 const UpdateWrap = styled.div`
@@ -299,7 +279,18 @@ const Background = styled.div`
   z-index: 999;
 `;
 
-const UpdateBox = styled.form`
+const LikeBox = styled.div`
+  display: flex;
+`;
+
+const NumberOfLikes = styled.div`
+  display: flex;
+  font-size: 20px;
+  margin: auto;
+  margin-left: 50px;
+  margin-right: 10px;
+`;
+const UpdateBox = styled.div`
   position: absolute;
   width: 800px;
   gap: 10px;
@@ -328,10 +319,6 @@ const UpdateButton = styled.button`
   color: white;
   margin-right: 5px;
   cursor: pointer;
-  &:hover {
-    background-color: lightgray;
-    color: black;
-  }
 `;
 
 const Buttons = styled.div`
@@ -345,26 +332,6 @@ const User = styled.div`
   text-align: left;
   display: flex;
   gap: 500px;
-`;
-
-{
-  /* <LikeBox>
-  <h3>{detail.title}</h3>
-  <NumberOfLikes>{detail.likeNum}</NumberOfLikes>
-  <Heart>❤︎</Heart>
-</LikeBox> */
-}
-
-const LikeBox = styled.div`
-  display: flex;
-`;
-
-const NumberOfLikes = styled.div`
-  display: flex;
-  font-size: 20px;
-  margin: auto;
-  margin-left: 50px;
-  margin-right: 10px;
 `;
 
 const Heart = styled.div`
@@ -391,4 +358,12 @@ const Upbutton = styled.button`
     background-color: #b4b4b4;
     color: white;
   }
+`;
+
+const UpdateForm = styled.form`
+  position: absolute;
+  width: 800px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
 `;
