@@ -68,9 +68,9 @@ export default function App() {
         .then((res) => res.json())
         .then((response) => {
           if (response.statusCode === "OK") {
-            alert("정상적으로 회원가입이 완료되었습니다");
-            // window.location.replace("/백엔드랑 협의된 주소");
-          } else {
+            alert(response.msg); // alert("정상적으로 회원가입이 완료되었습니다"); 작동 잘 됨.
+          } 
+          else {
             alert("회원가입에 실패하였습니다.");
           }
         });
@@ -147,27 +147,27 @@ const HeaderBox = styled.div`
 const TitleBox = styled.div`
   display: flex;
 `;
-const Logo = styled.h1`
-  margin: auto 0px;
-`;
+
 
 const LoginBox = styled.div`
   width: 400px;
   height: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 150px;
+  margin-top: 100px; 
 `;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 40px; 
 `;
 
 const Buttons = styled.div`
   display: flex;
   margin: 0 auto;
   margin-top: 10px;
+  padding-left: 330px; 
 `;
 
 const Input = styled.input`
@@ -190,4 +190,11 @@ const Signup = styled.button`
     background-color: lightgray;
     color: black;
   }
+`;
+
+const Logo = styled.h1` 
+  margin: auto 0px;
+  font-family: "LOTTERIACHAB";
+  font-weight: 100;
+  font-size: 50px;
 `;

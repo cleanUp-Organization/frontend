@@ -49,7 +49,7 @@ export default function App() {
           console.log(response.jwtUtil);
           if (response.statusCode === "OK") {
             // 로그인 성공시
-            alert("로그인 성공");
+            alert(response.msg); // alert("로그인 성공");
             navigate("/main");
             const accessToken = response.jwtUtil;
             console.log(accessToken);
@@ -111,6 +111,8 @@ export default function App() {
             onChange={onChange}
           />
           <Buttons>
+            <Signup onClick={() => navigate("/signup")}>회원가입</Signup>
+
             <Login onClick={letsLogin}>로그인</Login>
             {/* <input
               type="button"
@@ -119,7 +121,6 @@ export default function App() {
               id="loginBtn"
               value="로그인"
             /> */}
-            <Signup onClick={() => navigate("/signup")}>회원가입</Signup>
           </Buttons>
         </InputBox>
       </LoginBox>
@@ -138,27 +139,27 @@ const HeaderBox = styled.div`
 const TitleBox = styled.div`
   display: flex;
 `;
-const Logo = styled.h1`
-  margin: auto 0px;
-`;
+
 
 const LoginBox = styled.div`
   width: 400px;
   height: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 150px;
+  margin-top: 100px; 
 `;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 40px;  
 `;
 
 const Buttons = styled.div`
   display: flex;
   margin: 0 auto;
   margin-top: 10px;
+  padding-left: 265px; 
 `;
 
 const Input = styled.input`
@@ -196,4 +197,11 @@ const Signup = styled.button`
     background-color: lightgray;
     color: black;
   }
+`;
+
+const Logo = styled.h1` 
+  margin: auto 0px;
+  font-family: "LOTTERIACHAB";
+  font-weight: 100;
+  font-size: 50px;
 `;

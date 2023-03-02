@@ -77,7 +77,7 @@ function Comment() {
           <Button>등록</Button>
         </form>
       </WrapBox>
-      <CommentBox>
+      <NewCommentBox>
         {detail.length > 0 &&
           detail.map((item) => {
             return (
@@ -93,7 +93,7 @@ function Comment() {
               </CommentBox>
             );
           })}
-      </CommentBox>
+      </NewCommentBox>
     </div>
   );
 }
@@ -110,8 +110,10 @@ const CommentInput = styled.input`
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 10px;
-  width: 720px;
+  width: 700px;
+  height: 30px;
   margin-right: 10px;
+  padding-left: 15px;
 `;
 
 const Button = styled.button`
@@ -121,12 +123,72 @@ const Button = styled.button`
   width: 55px;
   height: 35px;
   color: white;
+  margin-top: 10px;
   cursor: pointer;
+  &:hover {
+    background-color: #0064FF;
+    color: white;
+  }
+`;
+
+
+//---------------------------------------------------
+      // <CommentBox>
+      //   {detail.length > 0 &&
+      //     detail.map((item) => {
+      //       return (
+      //         <CommentBox key={item.id}>
+      //           <FaCommentDots style={style} />
+      //           <UserComments>
+      //             <NameBox>{item.username}</NameBox>
+      //             <div>{item.contents}</div>
+      //           </UserComments>
+      //           <DButton onClick={() => commentDeleteHandler(item.id)}>
+      //             삭제
+      //           </DButton>
+      //         </CommentBox>
+      //       );
+      //     })}
+      // </CommentBox>
+//---------------------------------------------------
+
+const DButton = styled.button`
+  border-radius: 5px;
+  background-color: black;
+  border: none;
+  width: 55px;
+  height: 35px;
+  color: white;
+  margin-right: 10px;
+  margin-top: 4px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  &:hover {
+    background-color: red;
+    color: white;
+  }
+`;
+
+const NewCommentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 800px;
+  gap: 10px;
+  position: relative;
+  margin-bottom: 100px;
+
 `;
 
 const CommentBox = styled.div`
+border-top: solid 1px lightgray;
+border-bottom: solid 1px lightgray;
+padding-top: 20px;
+padding-bottom: 10px;
   display: flex;
-  margin-top: 10px;
+  flex-direction: row;
+  margin-top: 5px;
   width: 800px;
   gap: 10px;
   position: relative;
@@ -146,14 +208,3 @@ const NameBox = styled.div`
   font-weight: 600;
 `;
 
-const DButton = styled.button`
-  border-radius: 5px;
-  background-color: rgb(83, 127, 231);
-  border: none;
-  width: 55px;
-  height: 35px;
-  color: white;
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-`;

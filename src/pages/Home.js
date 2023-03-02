@@ -7,6 +7,10 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 
+// ------------------------------------------------
+import { addLike } from "../api/clean";
+// ------------------------------------------------
+
 function Home() {
   // const { data } = useQuery("clean", getBoard);
 
@@ -15,6 +19,7 @@ function Home() {
       setList(response);
     },
   });
+  
   const navigate = useNavigate();
   const [list, setList] = useState([]);
   console.log(list);
@@ -63,12 +68,25 @@ function Home() {
             onChange={handlerPageChange}
           />
         </PageBox>
+
+      <SignOutText onClick={() => navigate("/signout")}>회원 탈퇴</SignOutText>
       </Layout>
     </>
   );
 }
 
 export default Home;
+
+
+const SignOutText = styled.div`
+  color: darkgray;
+  position: fixed;
+  bottom: 3%;
+  right: 4%;
+  cursor: pointer;
+`;
+
+
 
 const Nav = styled.p`
   margin: 0 auto;
@@ -131,7 +149,7 @@ const PageBox = styled.div`
   .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: 40px;
   }
   ul {
     list-style: none;
