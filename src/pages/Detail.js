@@ -118,6 +118,33 @@ function Detail() {
     }
   };
 
+  //좋아요
+  const access_token = localStorage.getItem("token");
+  const [likeNum, setLikeNum] = useState(0);
+  const onLikeHandler = async () => {
+    const body = {
+      id: id,
+    };
+    await instance
+      .post(`/api/boards/${id}/like`, body, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((response) => {
+        if (response.statusCode === "OK") {
+          setLikeNum((prev) => prev + 1);
+          alert(response.msg);
+        }
+      })
+      .catch((error) => {
+        if (error.statusCode === "BAD_REQUEST") {
+          alert(error.msg);
+        }
+      });
+    setLikeNum(likeNum);
+  };
+
   return (
     <>
       <Header />
@@ -130,12 +157,11 @@ function Detail() {
           <LikeBox>
             <h3>{detail.title}</h3>
             <NumberOfLikes>{detail.likeNum}</NumberOfLikes>
-            <Heart>❤︎</Heart>
+            <Heart onClick={onLikeHandler}>❤︎</Heart>
           </LikeBox>
           <div>
-
-              <EditButton onClick={onToggle}>수정</EditButton>
-              <DeleteButton onClick={() => deleteHandler(id)}>삭제</DeleteButton>
+            <EditButton onClick={onToggle}>수정</EditButton>
+            <DeleteButton onClick={() => deleteHandler(id)}>삭제</DeleteButton>
 
             {open && (
               <UpdateWrap>
@@ -153,9 +179,7 @@ function Detail() {
                           setUpdateTitle(event.target.value);
                         }}
                       />
-                      <Upbutton onClick={onImgButton}>
-                      📷
-                      </Upbutton>
+                      <Upbutton onClick={onImgButton}>📷</Upbutton>
                       <div>
                         <ImgBox src={imgView} alt="img" />
                       </div>
@@ -323,11 +347,13 @@ const User = styled.div`
   gap: 500px;
 `;
 
-{/* <LikeBox>
+{
+  /* <LikeBox>
   <h3>{detail.title}</h3>
   <NumberOfLikes>{detail.likeNum}</NumberOfLikes>
   <Heart>❤︎</Heart>
-</LikeBox> */}
+</LikeBox> */
+}
 
 const LikeBox = styled.div`
   display: flex;
@@ -347,9 +373,8 @@ const Heart = styled.div`
   margin: auto;
   cursor: pointer;
   &:hover {
-    color: rgb(255, 86, 119); 
+    color: rgb(255, 86, 119);
   }
-  
 `;
 
 const Upbutton = styled.button`
