@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { getBoard } from "../api/clean";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
-import { instance } from "../api/axios";
+import "../fonts/font.css";
 
 function Home() {
   // const { data } = useQuery("clean", getBoard);
@@ -80,26 +80,31 @@ const SignOutText = styled.div`
   bottom: 3%;
   right: 4%;
   cursor: pointer;
+  font-family: "GmarketSansMedium";
 `;
 
 const Nav = styled.p`
   margin: 0 auto;
   margin-top: 6rem;
   width: 870px;
+  font-size: 20px;
+  font-family: "SaenggeoJincheon";
 `;
 const Wrap = styled.div`
   width: 870px;
   margin: 0 auto;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   height: 300px;
   display: flex;
   gap: 20px;
   overflow: hidden;
+  font-family: "GmarketSansMedium";
 `;
 
 const CleanBox = styled.div`
   width: 200px;
   text-align: center;
+  font-family: "GmarketSansMedium";
 `;
 
 const Title = styled.div`
@@ -155,6 +160,7 @@ const PageBox = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 1rem;
+    border: none;
   }
   ul.pagination li:first-child {
     border-radius: 5px 0 0 5px;
@@ -180,8 +186,9 @@ const PageBox = styled.div`
 `;
 
 const User = styled.div`
-  font-size: 11px;
+  font-size: 13px;
   margin-bottom: 8px;
   color: blue;
   text-align: left;
+  font-family: "KyoboHandwriting2021sjy";
 `;

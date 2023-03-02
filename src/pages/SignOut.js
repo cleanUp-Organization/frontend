@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import "../fonts/font.css";
 
 function SignOut() {
   // const [inputs, setInputs] = useState([]);
@@ -33,15 +34,13 @@ function SignOut() {
   };
   return (
     <Layout>
-      
       <Header></Header>
       <SignoutBox>
-      <h2>회원탈퇴</h2>
-          <Buttons>
-            <Signout onClick={letsSignout}>탈퇴하기</Signout>
-          </Buttons>
+        <h2>회원탈퇴</h2>
+        <Buttons>
+          <Signout onClick={letsSignout}>탈퇴하기</Signout>
+        </Buttons>
       </SignoutBox>
-
     </Layout>
   );
 }
@@ -51,13 +50,14 @@ export default SignOut;
 const SignoutBox = styled.div`
   margin: 0 auto;
   text-align: center;
-  margin-top: 100px; 
+  margin-top: 100px;
+  font-family: "GmarketSansMedium";
 `;
-
 
 const Buttons = styled.div`
   margin: 0 auto;
-  margin-top: 30px; 
+  margin-top: 30px;
+  font-family: "GmarketSansMedium";
 `;
 
 const Signout = styled.button`
@@ -73,4 +73,5 @@ const Signout = styled.button`
     background-color: red;
     color: white;
   }
+  font-family: "GmarketSansMedium";
 `;

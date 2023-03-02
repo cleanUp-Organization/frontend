@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { deleteBoard, updateBoard } from "../api/clean";
 import Comment from "../components/comment";
 import { instance } from "../api/axios";
+import "../fonts/font.css";
 
 function Detail() {
   const navigate = useNavigate();
@@ -230,11 +231,13 @@ const Wrap = styled.div`
   flex-direction: column;
   width: 800px;
   gap: 10px;
+  font-family: "GmarketSansMedium";
 `;
 
 const TitleBox = styled.div`
   display: flex;
   justify-content: space-between;
+  font-family: "GmarketSansMedium";
 `;
 
 const ImgBox = styled.img`
@@ -260,6 +263,7 @@ const Button = styled.button`
   color: white;
   margin-right: 5px;
   cursor: pointer;
+  font-family: "GmarketSansMedium";
 `;
 
 const UpdateWrap = styled.div`
@@ -268,6 +272,7 @@ const UpdateWrap = styled.div`
   top: 9rem;
   left: 21rem;
   background-color: white;
+  font-family: "GmarketSansMedium";
 `;
 
 const Background = styled.div`
@@ -289,6 +294,7 @@ const NumberOfLikes = styled.div`
   margin: auto;
   margin-left: 50px;
   margin-right: 10px;
+  font-family: "GmarketSansMedium";
 `;
 const UpdateBox = styled.div`
   position: absolute;
@@ -296,18 +302,22 @@ const UpdateBox = styled.div`
   gap: 10px;
   display: flex;
   flex-direction: column;
+  font-family: "GmarketSansMedium";
 `;
 
 const TitleInput = styled.input`
   border-radius: 5px;
   padding: 20px;
   border: 1px solid lightgray;
+  font-family: "GmarketSansMedium";
 `;
 
 const ContentInput = styled.textarea`
   border-radius: 5px;
   padding: 20px;
   border: 1px solid lightgray;
+  font-family: "GmarketSansMedium";
+  outline: none;
 `;
 
 const UpdateButton = styled.button`
@@ -319,6 +329,7 @@ const UpdateButton = styled.button`
   color: white;
   margin-right: 5px;
   cursor: pointer;
+  font-family: "GmarketSansMedium";
 `;
 
 const Buttons = styled.div`
@@ -332,6 +343,9 @@ const User = styled.div`
   text-align: left;
   display: flex;
   gap: 500px;
+  justify-content: space-between;
+  font-family: "KyoboHandwriting2021sjy";
+  font-size: 13px;
 `;
 
 const Heart = styled.div`
@@ -342,6 +356,7 @@ const Heart = styled.div`
   &:hover {
     color: rgb(255, 86, 119);
   }
+  font-family: "GmarketSansMedium";
 `;
 
 const Upbutton = styled.button`
