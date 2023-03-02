@@ -10,14 +10,14 @@ import { instance } from "../api/axios";
 
 function Home() {
   // const { data } = useQuery("clean", getBoard);
-
+  const [list, setList] = useState([]);
   const { data } = useQuery("clean", getBoard, {
     onSuccess: (response) => {
       setList(response);
     },
   });
   const navigate = useNavigate();
-  const [list, setList] = useState([]);
+
   console.log(list);
   const [page, setPage] = useState(1);
   const [item, setItems] = useState(5);
@@ -64,12 +64,23 @@ function Home() {
             onChange={handlerPageChange}
           />
         </PageBox>
+        <SignOutText onClick={() => navigate("/signout")}>
+          회원 탈퇴
+        </SignOutText>
       </Layout>
     </>
   );
 }
 
 export default Home;
+
+const SignOutText = styled.div`
+  color: darkgray;
+  position: fixed;
+  bottom: 3%;
+  right: 4%;
+  cursor: pointer;
+`;
 
 const Nav = styled.p`
   margin: 0 auto;
