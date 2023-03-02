@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { GiBroom } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
+import "../fonts/font.css";
 
 export default function App() {
   let username = document.querySelector("#username");
@@ -69,8 +70,7 @@ export default function App() {
         .then((response) => {
           if (response.statusCode === "OK") {
             alert(response.msg); // alert("정상적으로 회원가입이 완료되었습니다"); 작동 잘 됨.
-          } 
-          else {
+          } else {
             alert("회원가입에 실패하였습니다.");
           }
         });
@@ -137,6 +137,7 @@ export default function App() {
   );
 }
 const HeaderBox = styled.div`
+  font-family: "GmarketSansMedium";
   width: 100%;
   height: 6rem;
   background-color: rgb(83, 127, 231);
@@ -146,28 +147,31 @@ const HeaderBox = styled.div`
 `;
 const TitleBox = styled.div`
   display: flex;
+  font-family: "GmarketSansMedium";
 `;
-
 
 const LoginBox = styled.div`
   width: 400px;
   height: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 100px; 
+  margin-top: 100px;
+  font-family: "GmarketSansMedium";
 `;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 40px; 
+  margin-top: 40px;
+  font-family: "GmarketSansMedium";
 `;
 
 const Buttons = styled.div`
   display: flex;
   margin: 0 auto;
   margin-top: 10px;
-  padding-left: 330px; 
+  padding-left: 330px;
+  font-family: "GmarketSansMedium";
 `;
 
 const Input = styled.input`
@@ -175,6 +179,7 @@ const Input = styled.input`
   padding: 20px;
   margin-bottom: 10px;
   outline: none;
+  font-family: "GmarketSansMedium";
 `;
 
 const Signup = styled.button`
@@ -190,9 +195,10 @@ const Signup = styled.button`
     background-color: lightgray;
     color: black;
   }
+  font-family: "GmarketSansMedium";
 `;
 
-const Logo = styled.h1` 
+const Logo = styled.h1`
   margin: auto 0px;
   font-family: "LOTTERIACHAB";
   font-weight: 100;

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { GiBroom } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
+import "../fonts/font.css";
 
 export default function App() {
   let username = document.querySelector("#username");
@@ -135,31 +136,35 @@ const HeaderBox = styled.div`
   color: white;
   display: flex;
   justify-content: space-around;
+  font-family: "GmarketSansMedium";
 `;
 const TitleBox = styled.div`
   display: flex;
+  font-family: "GmarketSansMedium";
 `;
-
 
 const LoginBox = styled.div`
   width: 400px;
   height: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 100px; 
+  margin-top: 100px;
+  font-family: "GmarketSansMedium";
 `;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 40px;  
+  margin-top: 40px;
+  font-family: "GmarketSansMedium";
 `;
 
 const Buttons = styled.div`
   display: flex;
   margin: 0 auto;
   margin-top: 10px;
-  padding-left: 265px; 
+  padding-left: 265px;
+  font-family: "GmarketSansMedium";
 `;
 
 const Input = styled.input`
@@ -167,6 +172,7 @@ const Input = styled.input`
   padding: 20px;
   margin-bottom: 10px;
   outline: none;
+  font-family: "GmarketSansMedium";
 `;
 
 const Login = styled.button`
@@ -182,6 +188,7 @@ const Login = styled.button`
     background-color: lightgray;
     color: black;
   }
+  font-family: "GmarketSansMedium";
 `;
 
 const Signup = styled.button`
@@ -197,9 +204,10 @@ const Signup = styled.button`
     background-color: lightgray;
     color: black;
   }
+  font-family: "GmarketSansMedium";
 `;
 
-const Logo = styled.h1` 
+const Logo = styled.h1`
   margin: auto 0px;
   font-family: "LOTTERIACHAB";
   font-weight: 100;

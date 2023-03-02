@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { addBoard } from "../api/clean";
 import { useNavigate } from "react-router-dom";
+import "../fonts/font.css";
 
 function Board() {
   //데이터 조회
@@ -69,10 +70,7 @@ function Board() {
     <>
       <Header />
       <FormBox onSubmit={onSubmitHandler}>
-
-        <Upbutton onClick={onImgButton}>
-        📷
-        </Upbutton>
+        <Upbutton onClick={onImgButton}>📷</Upbutton>
 
         <div>
           {imgView.map((item) => {
@@ -123,6 +121,7 @@ const FormBox = styled.form`
   flex-direction: column;
   width: 800px;
   gap: 10px;
+  font-family: "GmarketSansMedium";
 `;
 
 const TitleInput = styled.input`
@@ -133,6 +132,8 @@ const TitleInput = styled.input`
   height: 50px;
   color: black;
   padding-left: 15px;
+  font-family: "GmarketSansMedium";
+  outline: none;
 `;
 
 const ContentInput = styled.textarea`
@@ -144,6 +145,8 @@ const ContentInput = styled.textarea`
   color: black;
   padding-top: 15px;
   padding-left: 15px;
+  font-family: "GmarketSansMedium";
+  outline: none;
 `;
 
 const Button = styled.button`
@@ -156,9 +159,10 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   &:hover {
-    background-color: #0064FF;
+    background-color: #0064ff;
     color: white;
   }
+  font-family: "GmarketSansMedium";
 `;
 
 const Upbutton = styled.button`
@@ -175,8 +179,9 @@ const Upbutton = styled.button`
     background-color: #b4b4b4;
     color: white;
   }
+  font-family: "GmarketSansMedium";
 `;
-  
+
 const ImgBox = styled.img`
   width: 100%;
   border-radius: 5px;
