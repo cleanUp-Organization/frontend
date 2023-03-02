@@ -93,7 +93,6 @@ const getComment = async (id) => {
 };
 
 const addComment = async (id) => {
-  console.log(id);
   await baseURL
     .post(
       `/api/boards/${id.id}/comments`,
@@ -132,6 +131,7 @@ const deleteComment = async (id) => {
       }
     });
 };
+
 export {
   getBoard,
   addBoard,

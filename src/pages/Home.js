@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getBoard } from "../api/clean";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
-
-// ------------------------------------------------
-import { addLike } from "../api/clean";
-// ------------------------------------------------
+import { instance } from "../api/axios";
 
 function Home() {
   // const { data } = useQuery("clean", getBoard);
@@ -19,7 +16,6 @@ function Home() {
       setList(response);
     },
   });
-  
   const navigate = useNavigate();
   const [list, setList] = useState([]);
   console.log(list);
@@ -68,25 +64,12 @@ function Home() {
             onChange={handlerPageChange}
           />
         </PageBox>
-
-      <SignOutText onClick={() => navigate("/signout")}>회원 탈퇴</SignOutText>
       </Layout>
     </>
   );
 }
 
 export default Home;
-
-
-const SignOutText = styled.div`
-  color: darkgray;
-  position: fixed;
-  bottom: 3%;
-  right: 4%;
-  cursor: pointer;
-`;
-
-
 
 const Nav = styled.p`
   margin: 0 auto;
@@ -139,17 +122,14 @@ const Heart = styled.div`
   position: absolute;
   top: 80%;
   left: 80%;
-  cursor: pointer;
-  &:hover {
-    color: rgb(255, 86, 119);
-  }
+  color: rgb(255, 86, 119);
 `;
 
 const PageBox = styled.div`
   .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 15px;
   }
   ul {
     list-style: none;
