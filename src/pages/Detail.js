@@ -121,11 +121,11 @@ function Detail() {
   //좋아요
   const access_token = localStorage.getItem("token");
   const [likeNum, setLikeNum] = useState(0);
-  const onLikeHandler = () => {
+  const onLikeHandler = async () => {
     const body = {
       id: id,
     };
-    instance
+    await instance
       .post(`/api/boards/${id}/like`, body, {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -142,6 +142,7 @@ function Detail() {
           alert(error.msg);
         }
       });
+    setLikeNum(likeNum);
   };
 
   return (
