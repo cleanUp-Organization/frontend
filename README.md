@@ -1,5 +1,6 @@
 <h1 align="left">🧹 청소대장 프로젝트</h1>
 <p>청소가 어려운 사람들을 위해 꿀팁을 공유하는 웹페이지입니다.</p></br>
+<img src="https://velog.velcdn.com/images/lionloopy/post/fca9a249-d21e-4ecd-bd9c-438e03ef17cd/image.png"/>
 <h1>💻 Skill </h1>
 <div>
    <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
