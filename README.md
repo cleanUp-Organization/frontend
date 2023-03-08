@@ -8,14 +8,14 @@
    +
       <img src="https://img.shields.io/badge/Spring-1572B6?style=flat&logo=Spring&logoColor=white"/>
    <h3>🖼 와이어 프레임</h3>
-   <img url="https://www.notion.so/5-SA-91ca769e62cd4fc5831fc011c5e23b87?pvs=4#2d5fff7311b345dd8534f7e364f38039"/>
+   <img src="https://www.notion.so/5-SA-91ca769e62cd4fc5831fc011c5e23b87?pvs=4#2d5fff7311b345dd8534f7e364f38039"/>
    <h3>📌 기능 정리</h3>
-   - 회원가입 / 로그인 / 회원탈퇴
-   - 게시글 작성 / 이미지 업로드
-   - 게시글 삭제 / 게시글 수정
-   - 메인페이지 게시글 조회 
-   - 페이지네이션
-   - 댓글 작성 / 댓글 삭제
+   - 회원가입 / 로그인 / 회원탈퇴 </br>
+   - 게시글 작성 / 이미지 업로드 </br>
+   - 게시글 삭제 / 게시글 수정 </br>
+   - 메인페이지 게시글 조회  </br>
+   - 페이지네이션 </br>
+   - 댓글 작성 / 댓글 삭제 </br>
    
 </div>
 
