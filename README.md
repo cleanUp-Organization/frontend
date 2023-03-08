@@ -1,9 +1,7 @@
 <h1>🧹 청소대장 프로젝트</h1>
 <p>청소가 어려운 사람들을 위해 꿀팁을 공유하는 웹페이지입니다.</p>
 <h1>💻 Skill </h1>
-   <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
-      <img src="https://img.shields.io/badge/React Query-FF4154?style=flat&logo=React Query&logoColor=white"/>
-      <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white"/>
+   <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/><img src="https://img.shields.io/badge/React Query-FF4154?style=flat&logo=React Query&logoColor=white"/><img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white"/>
    +
       <img src="https://img.shields.io/badge/Spring-1572B6?style=flat&logo=Spring&logoColor=white"/>
    <h1>🖼 와이어 프레임</h1>
